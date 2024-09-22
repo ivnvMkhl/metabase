@@ -36,7 +36,6 @@ export const ContainerPadding = styled.div<{
 export const ExportContainerWrapper = styled.div`
   width: 100%;
   height: 100%;
-  overflow: hidden;
 `;
 
 export const DashboardHeader = styled.h2`

@@ -26,7 +26,6 @@ import * as MetabaseAnalytics from "metabase/lib/analytics";
 import {
   GRID_WIDTH,
   GRID_ASPECT_RATIO,
-  GRID_BREAKPOINTS,
   GRID_COLUMNS,
   DEFAULT_CARD_SIZE,
   MIN_ROW_HEIGHT,
@@ -594,6 +593,7 @@ class DashboardExportGrid extends Component<
     const { width } = this.props;
     const { layouts } = this.state;
     const rowHeight = this.getRowHeight();
+    const visibleCards = this.getVisibleCards();
     return (
       <GridLayout
         className={cx({
@@ -601,7 +601,7 @@ class DashboardExportGrid extends Component<
           [DashboardS.DashDragging]: this.state.isDragging,
         })}
         layouts={layouts}
-        breakpoints={GRID_BREAKPOINTS}
+        breakpoints={{ desktop: 601, mobile: 600 }}
         cols={GRID_COLUMNS}
         width={width}
         margin={{ desktop: [6, 6], mobile: [6, 10] }}
@@ -612,7 +612,7 @@ class DashboardExportGrid extends Component<
         onDragStop={this.onDragStop}
         isEditing={this.isEditingLayout}
         compactType="vertical"
-        items={this.getVisibleCards()}
+        items={visibleCards}
         itemRenderer={this.renderGridItem}
       />
     );

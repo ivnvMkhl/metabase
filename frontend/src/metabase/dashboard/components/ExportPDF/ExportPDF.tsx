@@ -49,7 +49,7 @@ import {
 } from "metabase/selectors/user";
 import { Loader } from "metabase/ui";
 import type { DashboardCard, DashboardId } from "metabase-types/api";
-import type { State } from "metabase-types/store";
+import type { State, StoreDashcard } from "metabase-types/store";
 
 import * as dashboardActions from "../../actions";
 import {
@@ -58,14 +58,9 @@ import {
 } from "../Dashboard/DashboardEmptyState/DashboardEmptyState";
 import { DashboardExportGridConnected } from "../DashboardExportGrid";
 
-import {
-  ExportContainer,
-  type PrintPageMeta,
-} from "./ExportContainer/ExportContainer";
+import { ExportContainer } from "./ExportContainer/ExportContainer";
 import { ExportMenu } from "./ExportMenu/ExportMenu";
 import type { ExportFormat, ExportOrientation } from "./ExportPDF.interfaces";
-
-const FIRST_TAB = "1";
 
 const mapStateToProps = (state: State) => {
   return {
@@ -107,6 +102,87 @@ type OwnProps = {
   children?: ReactNode;
 };
 
+const getPageBottomRow = (
+  format: ExportFormat,
+  orientation: ExportOrientation,
+) => {
+  switch (format) {
+    case "a4": {
+      switch (orientation) {
+        case "p":
+          return 20;
+        case "l":
+          return 13;
+      }
+      break;
+    }
+    case "a3": {
+      switch (orientation) {
+        case "p":
+          return 30;
+        case "l":
+          return 14;
+      }
+      break;
+    }
+  }
+};
+
+const getDashcardGroups = (
+  dashcards: StoreDashcard[],
+  pageMaxRows: number,
+  appendCardsHeight = false,
+): StoreDashcard[][] => {
+  const { current, last, minLastStartRow, maxCurrentEndRow } =
+    dashcards.reduce<{
+      current: StoreDashcard[];
+      minLastStartRow: number;
+      maxCurrentEndRow: number;
+      last: StoreDashcard[];
+    }>(
+      (acc, dashcard) => {
+        const dashcardEndRow = dashcard.row + dashcard.size_y;
+        if (dashcardEndRow > pageMaxRows) {
+          return {
+            ...acc,
+            last: [...acc.last, dashcard],
+            minLastStartRow: Math.min(dashcard.row, acc.minLastStartRow),
+          };
+        }
+        return {
+          ...acc,
+          current: [...acc.current, dashcard],
+          maxCurrentEndRow: Math.max(dashcardEndRow, acc.maxCurrentEndRow),
+        };
+      },
+      {
+        current: [],
+        minLastStartRow: +Infinity,
+        maxCurrentEndRow: 0,
+        last: [],
+      },
+    );
+  const updatedCurrent = appendCardsHeight
+    ? current.map(dashcard => {
+        const dashcardEndRow = dashcard.row + dashcard.size_y;
+        if (dashcardEndRow === maxCurrentEndRow) {
+          return { ...dashcard, size_y: pageMaxRows - dashcard.row };
+        }
+        return dashcard;
+      })
+    : current;
+  if (!last.length) {
+    return [updatedCurrent];
+  }
+  const updatedLastCards = last.map(dashcard => {
+    return { ...dashcard, row: dashcard.row - minLastStartRow };
+  });
+  return [
+    updatedCurrent,
+    ...getDashcardGroups(updatedLastCards, pageMaxRows, appendCardsHeight),
+  ];
+};
+
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 type DashboardAppProps = OwnProps & ReduxProps & WithRouterProps;
@@ -135,11 +211,9 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
   const [exportFormat, setExportFormat] = useState<ExportFormat>("a4");
   const [exportOrientation, setExportOrientation] =
     useState<ExportOrientation>("p");
+  const [appendCardsHeight, setAppendCardsHeight] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const [error, setError] = useState<unknown>(null);
-  const [pagesMetaById, setPagesMetaById] = useState<
-    Record<string, PrintPageMeta> | undefined
-  >();
   const dashboardId = getDashboardId(props);
 
   const currentTabDashcards = useMemo(() => {
@@ -159,11 +233,9 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
 
   const handleChangeExportFormat = (format: ExportFormat) => {
     setExportFormat(format);
-    setPagesMetaById(undefined);
   };
   const handleChangeExportOrientation = (orientation: ExportOrientation) => {
     setExportOrientation(orientation);
-    setPagesMetaById(undefined);
   };
 
   const handleLoadDashboard = useCallback(
@@ -222,29 +294,6 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
     isInitialized,
   ]);
 
-  useEffect(() => {
-    if (dashboard && !pagesMetaById) {
-      const initialHiddenMeta = dashboard.dashcards.reduce<
-        Record<string, string[]>
-      >((acc, dashcard) => {
-        if (dashcard.dashboard_tab_id === null) {
-          return { ...acc, "1": [...(acc?.["1"] ?? []), String(dashcard.id)] };
-        }
-        return {
-          ...acc,
-          [dashcard.dashboard_tab_id]: [
-            ...(acc?.[dashcard.dashboard_tab_id] ?? []),
-            String(dashcard.id),
-          ],
-        };
-      }, {});
-      const normalizeHiddenMeta = Object.entries(initialHiddenMeta).reduce<
-        Record<string, PrintPageMeta>
-      >((acc, [key, value]) => ({ ...acc, [key]: [value] }), {});
-      setPagesMetaById(normalizeHiddenMeta);
-    }
-  }, [dashboard, pagesMetaById]);
-
   if (error) {
     return <Error>Ошибка загрузки дашборда</Error>;
   }
@@ -265,7 +314,7 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
     );
   }
 
-  if (!dashboard || !pagesMetaById) {
+  if (!dashboard) {
     return null;
   }
 
@@ -286,33 +335,29 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
     return <DashboardEmptyStateWithoutAddPrompt isNightMode={isNightMode} />;
   }
 
-  const handlePagesMetaById =
-    (tabId: number | string) => (hiddenMeta: PrintPageMeta) => {
-      setPagesMetaById({ ...pagesMetaById, [tabId]: hiddenMeta });
-    };
+  const pageMaxRows = getPageBottomRow(exportFormat, exportOrientation);
+
   if (!dashboard.tabs?.length) {
+    const exportDashcardGroups = getDashcardGroups(
+      dashboard.dashcards,
+      pageMaxRows,
+      appendCardsHeight,
+    );
     return (
       <ExportMenu
         onChangeFormat={handleChangeExportFormat}
         onChangeOrientation={handleChangeExportOrientation}
+        appendCardsHeight={appendCardsHeight}
+        onChangeAppendCardsHeight={setAppendCardsHeight}
         format={exportFormat}
         orientation={exportOrientation}
         dashboardName={dashboard.name}
       >
-        {pagesMetaById[FIRST_TAB].map((ids, index) => {
-          const cutDashboard = {
-            ...dashboard,
-            dashcards: dashboard.dashcards.filter(dashcard =>
-              ids.includes(String(dashcard.id)),
-            ),
-          };
+        {exportDashcardGroups.map((dashcards, index) => {
           return (
             <ExportContainer
               key={String(index)}
               title={dashboard.name}
-              printPagesMeta={pagesMetaById[FIRST_TAB]}
-              pageIndex={index}
-              onChangePageLayout={handlePagesMetaById(FIRST_TAB)}
               format={exportFormat}
               orientation={exportOrientation}
             >
@@ -325,7 +370,7 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
                 isFullscreen={false}
                 isEditingParameter={props.isEditingParameter}
                 isEditing={props.isEditing}
-                dashboard={cutDashboard}
+                dashboard={{ ...dashboard, dashcards }}
                 slowCards={props.slowCards}
                 navigateToNewCardFromDashboard={
                   props.navigateToNewCardFromDashboard
@@ -343,47 +388,49 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
     <ExportMenu
       onChangeFormat={handleChangeExportFormat}
       onChangeOrientation={handleChangeExportOrientation}
+      appendCardsHeight={appendCardsHeight}
+      onChangeAppendCardsHeight={setAppendCardsHeight}
       format={exportFormat}
       orientation={exportOrientation}
       dashboardName={dashboard.name}
     >
-      {[dashboard.tabs[selectedTabId - 1]].map(tab => {
-        return pagesMetaById[tab.id].map((ids, index) => {
-          const cutDashboard = {
-            ...dashboard,
-            dashcards: dashboard.dashcards.filter(dashcard =>
-              ids.includes(String(dashcard.id)),
+      {dashboard.tabs
+        .filter(tab => tab.id === selectedTabId)
+        .map(tab => {
+          const exportDashcardGroups = getDashcardGroups(
+            dashboard.dashcards.filter(
+              dashcard => dashcard.dashboard_tab_id === tab.id,
             ),
-          };
-          return (
-            <ExportContainer
-              key={`${tab.id}${ids}`}
-              title={dashboard.name}
-              printPagesMeta={pagesMetaById[tab.id]}
-              pageIndex={index}
-              onChangePageLayout={handlePagesMetaById(tab.id)}
-              format={exportFormat}
-              orientation={exportOrientation}
-            >
-              <DashboardExportGridConnected
-                clickBehaviorSidebarDashcard={
-                  props.clickBehaviorSidebarDashcard
-                }
-                isNightMode={isNightMode}
-                isFullscreen={false}
-                isEditingParameter={props.isEditingParameter}
-                isEditing={props.isEditing}
-                dashboard={cutDashboard}
-                slowCards={props.slowCards}
-                navigateToNewCardFromDashboard={
-                  props.navigateToNewCardFromDashboard
-                }
-                selectedTabId={tab.id}
-              />
-            </ExportContainer>
+            pageMaxRows,
+            appendCardsHeight,
           );
-        });
-      })}
+          return exportDashcardGroups.map((dashcards, index) => {
+            return (
+              <ExportContainer
+                key={`${tab.id}${index}`}
+                title={dashboard.name}
+                format={exportFormat}
+                orientation={exportOrientation}
+              >
+                <DashboardExportGridConnected
+                  clickBehaviorSidebarDashcard={
+                    props.clickBehaviorSidebarDashcard
+                  }
+                  isNightMode={isNightMode}
+                  isFullscreen={false}
+                  isEditingParameter={props.isEditingParameter}
+                  isEditing={props.isEditing}
+                  dashboard={{ ...dashboard, dashcards }}
+                  slowCards={props.slowCards}
+                  navigateToNewCardFromDashboard={
+                    props.navigateToNewCardFromDashboard
+                  }
+                  selectedTabId={tab.id}
+                />
+              </ExportContainer>
+            );
+          });
+        })}
     </ExportMenu>
   );
 };

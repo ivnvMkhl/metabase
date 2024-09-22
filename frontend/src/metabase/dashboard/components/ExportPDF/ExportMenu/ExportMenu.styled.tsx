@@ -11,3 +11,9 @@ export const Menu = styled.div`
   padding: 12px 22px 12px 22px;
   border: 1px solid gray;
 `;
+
+export const SwitchWidthLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;

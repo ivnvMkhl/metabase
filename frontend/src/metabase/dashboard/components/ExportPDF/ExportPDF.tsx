@@ -171,9 +171,26 @@ const getDashcardGroups = (
         return dashcard;
       })
     : current;
+
   if (!last.length) {
     return [updatedCurrent];
   }
+
+  if (!current.length) {
+    const [first, ...rest] = last;
+    const updatedFirst = { ...first, size_y: pageMaxRows };
+    if (rest.length) {
+      const updatedRestCards = rest.map(dashcard => {
+        return { ...dashcard, row: dashcard.row - first.size_y };
+      });
+      return [
+        [updatedFirst],
+        ...getDashcardGroups(updatedRestCards, pageMaxRows, appendCardsHeight),
+      ];
+    }
+    return [[updatedFirst]];
+  }
+
   const updatedLastCards = last.map(dashcard => {
     return { ...dashcard, row: dashcard.row - minLastStartRow };
   });

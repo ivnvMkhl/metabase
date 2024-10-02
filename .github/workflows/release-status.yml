@@ -2,8 +2,8 @@ name: Release and Backport Status Check
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 7 * * 1-5' # every weekday at 8am/9am Central European Time
+  # schedule:
+  #   - cron: '0 7 * * 1-5' # every weekday at 8am/9am Central European Time
 
 jobs:
   check-release-status:

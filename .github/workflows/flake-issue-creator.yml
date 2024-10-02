@@ -2,8 +2,8 @@ name: Flake Issue Creator
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * 1-5' # every weekday at 1am US eastern time
+  # schedule:
+  #   - cron: '0 6 * * 1-5' # every weekday at 1am US eastern time
 
 jobs:
   flake-issue-creator:

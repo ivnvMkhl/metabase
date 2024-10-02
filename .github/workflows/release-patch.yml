@@ -8,8 +8,8 @@ on:
         description: 'Major Metabase version (e.g. 45, 52, 68)'
         type: number
         required: true
-  schedule:
-    - cron: '15 0 * * 2-6' # every weekday at 7/8:15 pm Eastern Time
+  # schedule:
+  #   - cron: '15 0 * * 2-6' # every weekday at 7/8:15 pm Eastern Time
 
 jobs:
   auto-patch-trigger:

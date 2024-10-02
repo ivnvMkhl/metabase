@@ -2,8 +2,8 @@ name: Backend-Cloverage
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 10 * * 1-5' # every weekday at 5am US eastern time
+  # schedule:
+  #   - cron: '0 10 * * 1-5' # every weekday at 5am US eastern time
 
 jobs:
   be-linter-cloverage:

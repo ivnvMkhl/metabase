@@ -2,8 +2,8 @@ name: Flake Status Report
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * 2,5' # Tuesdays and Fridays at 1am US eastern time
+  # schedule:
+  #   - cron: '0 6 * * 2,5' # Tuesdays and Fridays at 1am US eastern time
 
 jobs:
   flake-status-report:

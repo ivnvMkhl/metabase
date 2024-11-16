@@ -5,13 +5,19 @@ import { isPK } from "metabase-lib/v1/types/utils/isa";
 
 import LeafletMap from "./LeafletMap";
 
-const STATIC_TOOLTIP_FIELD_KEY = "$_pin_name";
+export const STATIC_TOOLTIP_FIELD_KEY = "$_pin_name";
 
 const getIconWidthTooltip = text => {
-  const CUSTOM_MARKER = `
+  const CUSTOM_MARKER = text
+    ? `
   <div class="custom-map-marker">
     <img src="app/assets/img/pin.png" width="28" height="32"/>
     <span class="custom-map-marker-tooltip">${text}</span>
+  </div>
+  `
+    : `
+  <div class="custom-map-marker">
+    <img src="app/assets/img/pin.png" width="20" height="32"/>
   </div>
   `;
 
@@ -24,12 +30,12 @@ const getIconWidthTooltip = text => {
   });
 };
 
-const MARKER_ICON = L.icon({
-  iconUrl: "app/assets/img/pin.png",
-  iconSize: [26, 40],
-  iconAnchor: [15, 24],
-  popupAnchor: [0, -13],
-});
+// const MARKER_ICON = L.icon({
+//   iconUrl: "app/assets/img/pin.png",
+//   iconSize: [26, 40],
+//   iconAnchor: [15, 24],
+//   popupAnchor: [0, -13],
+// });
 
 export default class LeafletMarkerPinMap extends LeafletMap {
   componentDidMount() {
@@ -44,16 +50,27 @@ export default class LeafletMarkerPinMap extends LeafletMap {
 
     try {
       const { pinMarkerLayer } = this;
-      const { points, data } = this.props;
+      const { points, data, settings } = this.props;
       const columnsMetadata = data.cols;
+      const staticLabelFielName =
+        settings?.["map.staticLabelsColumn"] ?? STATIC_TOOLTIP_FIELD_KEY;
+      const prevStaticLabelFielName =
+        prevProps?.settings?.["map.staticLabelsColumn"] ??
+        STATIC_TOOLTIP_FIELD_KEY;
+      const staticLabelChanged =
+        staticLabelFielName !== prevStaticLabelFielName;
       const pinNameIndex = columnsMetadata.findIndex(
-        col => col.name === STATIC_TOOLTIP_FIELD_KEY,
+        col => col.name === staticLabelFielName,
       );
       const markerNames =
         pinNameIndex > -1 ? data.rows.map(row => row[pinNameIndex]) : undefined;
 
+      if (staticLabelChanged) {
+        pinMarkerLayer.clearLayers();
+      }
       const markers = pinMarkerLayer.getLayers();
       const max = Math.max(points.length, markers.length);
+
       for (let i = 0; i < max; i++) {
         if (i >= points.length) {
           pinMarkerLayer.removeLayer(markers[i]);
@@ -79,7 +96,7 @@ export default class LeafletMarkerPinMap extends LeafletMap {
 
   _createMarker = (rowIndex, markerName) => {
     const marker = L.marker([0, 0], {
-      icon: markerName ? getIconWidthTooltip(markerName) : MARKER_ICON,
+      icon: getIconWidthTooltip(markerName),
     });
 
     const { onHoverChange, onVisualizationClick, settings } = this.props;

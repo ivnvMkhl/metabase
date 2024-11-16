@@ -6,11 +6,15 @@ import _ from "underscore";
 import ColorRangeSelector from "metabase/core/components/ColorRangeSelector";
 import { getAccentColors } from "metabase/lib/colors/groups";
 import MetabaseSettings from "metabase/lib/settings";
+import { MultiSelect } from "metabase/ui";
+import { HIDE_TOOLTIP_KEYS_PREFIX } from "metabase/visualizations/components/ChartTooltip/KeyValuePairChartTooltip/KeyValuePairChartTooltip";
+import { STATIC_TOOLTIP_FIELD_KEY } from "metabase/visualizations/components/LeafletMarkerPinMap";
 import { ChartSettingsError } from "metabase/visualizations/lib/errors";
 import { columnSettings } from "metabase/visualizations/lib/settings/column";
 import {
   dimensionSetting,
   fieldSetting,
+  getOptionFromColumn,
   metricSetting,
 } from "metabase/visualizations/lib/settings/utils";
 import { isSameSeries } from "metabase/visualizations/lib/utils";
@@ -303,6 +307,56 @@ export class Map extends Component {
       widget: "number",
       default: 1,
       getHidden: (series, vizSettings) => vizSettings["map.type"] !== "heat",
+    },
+    "map.staticLabelsColumn": {
+      title: "Колонка для статических подписей",
+      widget: "field",
+      getDefault: ([{ card, data }], vizSettings) => {
+        const storedValue = vizSettings["map.staticLabelsColumn"];
+        if (storedValue && storedValue !== "none") {
+          return storedValue;
+        }
+        const isExistStaticField = data.cols.find(
+          col => col?.name === STATIC_TOOLTIP_FIELD_KEY,
+        );
+        if (isExistStaticField) {
+          return STATIC_TOOLTIP_FIELD_KEY;
+        }
+        return "none";
+      },
+      getProps: ([{ card, data }], vizSettings) => {
+        return {
+          options: [
+            { name: "Не отображать", value: "none" },
+            ...data.cols.map(getOptionFromColumn),
+          ],
+        };
+      },
+      getHidden: (series, vizSettings) =>
+        !PIN_MAP_TYPES.has(vizSettings["map.type"]),
+    },
+    "map.excludeTooltip": {
+      title: "Исключить колонки из тултипа",
+      widget: ({ data, onChange, value }) => (
+        <MultiSelect value={value} data={data} onChange={onChange} />
+      ),
+      getDefault: ([{ card, data }], vizSettings) => {
+        if (vizSettings["map.excludeTooltip"]) {
+          return vizSettings["map.excludeTooltip"];
+        }
+        return [];
+      },
+      getProps: ([{ card, data }], vizSettings) => {
+        return {
+          data: data.cols
+            .filter(col => !col?.name.startsWith(HIDE_TOOLTIP_KEYS_PREFIX))
+            .map(getOptionFromColumn)
+            .map(({ value }) => value),
+          clearable: true,
+        };
+      },
+      getHidden: (series, vizSettings) =>
+        !PIN_MAP_TYPES.has(vizSettings["map.type"]),
     },
   };
 

@@ -26,7 +26,7 @@ export interface StackedDataTooltipProps {
   settings: ComputedVisualizationSettings;
 }
 
-const HIDE_TOOLTIP_KEYS_PREFIX = "$_";
+export const HIDE_TOOLTIP_KEYS_PREFIX = "$_";
 
 const KeyValuePairChartTooltip = ({
   hovered,
@@ -36,22 +36,28 @@ const KeyValuePairChartTooltip = ({
   const { isAlreadyScaled } = hovered;
   const footerRows = hovered.footerData;
   const showFooter = footerRows && footerRows.length > 0;
+  const excludeColumns = settings?.["map.excludeTooltip"]
+    ? settings["map.excludeTooltip"]
+    : [];
+  const filteredRows = rows.filter(
+    ({ col }) =>
+      !excludeColumns.includes(col?.name) &&
+      !col?.name.startsWith(HIDE_TOOLTIP_KEYS_PREFIX),
+  );
 
   return (
     <TooltipTable>
       <TableBody hasBottomSpacing={showFooter}>
-        {rows
-          .filter(({ col }) => !col?.name.startsWith(HIDE_TOOLTIP_KEYS_PREFIX))
-          .map(({ key, value, col }, index) => (
-            <TooltipRow
-              key={index}
-              name={key}
-              value={value}
-              column={col}
-              settings={settings}
-              isAlreadyScaled={isAlreadyScaled}
-            />
-          ))}
+        {filteredRows.map(({ key, value, col }, index) => (
+          <TooltipRow
+            key={index}
+            name={key}
+            value={value}
+            column={col}
+            settings={settings}
+            isAlreadyScaled={isAlreadyScaled}
+          />
+        ))}
       </TableBody>
       {showFooter && (
         <TableFooter>

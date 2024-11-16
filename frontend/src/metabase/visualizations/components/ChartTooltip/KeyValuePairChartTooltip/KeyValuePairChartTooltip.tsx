@@ -26,6 +26,8 @@ export interface StackedDataTooltipProps {
   settings: ComputedVisualizationSettings;
 }
 
+const HIDE_TOOLTIP_KEYS_PREFIX = "$_";
+
 const KeyValuePairChartTooltip = ({
   hovered,
   settings,
@@ -33,22 +35,23 @@ const KeyValuePairChartTooltip = ({
   const rows = useMemo(() => getRows(hovered), [hovered]);
   const { isAlreadyScaled } = hovered;
   const footerRows = hovered.footerData;
-
   const showFooter = footerRows && footerRows.length > 0;
 
   return (
     <TooltipTable>
       <TableBody hasBottomSpacing={showFooter}>
-        {rows.map(({ key, value, col }, index) => (
-          <TooltipRow
-            key={index}
-            name={key}
-            value={value}
-            column={col}
-            settings={settings}
-            isAlreadyScaled={isAlreadyScaled}
-          />
-        ))}
+        {rows
+          .filter(({ col }) => !col?.name.startsWith(HIDE_TOOLTIP_KEYS_PREFIX))
+          .map(({ key, value, col }, index) => (
+            <TooltipRow
+              key={index}
+              name={key}
+              value={value}
+              column={col}
+              settings={settings}
+              isAlreadyScaled={isAlreadyScaled}
+            />
+          ))}
       </TableBody>
       {showFooter && (
         <TableFooter>

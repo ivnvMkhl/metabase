@@ -5,9 +5,28 @@ import { isPK } from "metabase-lib/v1/types/utils/isa";
 
 import LeafletMap from "./LeafletMap";
 
+const STATIC_TOOLTIP_FIELD_KEY = "$_pin_name";
+
+const getIconWidthTooltip = text => {
+  const CUSTOM_MARKER = `
+  <div class="custom-map-marker">
+    <img src="app/assets/img/pin.png" width="28" height="32"/>
+    <span class="custom-map-marker-tooltip">${text}</span>
+  </div>
+  `;
+
+  return L.divIcon({
+    className: "custom-map-marker-wrapper",
+    html: CUSTOM_MARKER,
+    iconSize: [28, 32],
+    iconAnchor: [15, 24],
+    popupAnchor: [0, -13],
+  });
+};
+
 const MARKER_ICON = L.icon({
   iconUrl: "app/assets/img/pin.png",
-  iconSize: [28, 32],
+  iconSize: [26, 40],
   iconAnchor: [15, 24],
   popupAnchor: [0, -13],
 });
@@ -25,7 +44,13 @@ export default class LeafletMarkerPinMap extends LeafletMap {
 
     try {
       const { pinMarkerLayer } = this;
-      const { points } = this.props;
+      const { points, data } = this.props;
+      const columnsMetadata = data.cols;
+      const pinNameIndex = columnsMetadata.findIndex(
+        col => col.name === STATIC_TOOLTIP_FIELD_KEY,
+      );
+      const markerNames =
+        pinNameIndex > -1 ? data.rows.map(row => row[pinNameIndex]) : undefined;
 
       const markers = pinMarkerLayer.getLayers();
       const max = Math.max(points.length, markers.length);
@@ -34,7 +59,7 @@ export default class LeafletMarkerPinMap extends LeafletMap {
           pinMarkerLayer.removeLayer(markers[i]);
         }
         if (i >= markers.length) {
-          const marker = this._createMarker(i);
+          const marker = this._createMarker(i, markerNames?.[i]);
           pinMarkerLayer.addLayer(marker);
           markers.push(marker);
         }
@@ -52,8 +77,11 @@ export default class LeafletMarkerPinMap extends LeafletMap {
     }
   }
 
-  _createMarker = rowIndex => {
-    const marker = L.marker([0, 0], { icon: MARKER_ICON });
+  _createMarker = (rowIndex, markerName) => {
+    const marker = L.marker([0, 0], {
+      icon: markerName ? getIconWidthTooltip(markerName) : MARKER_ICON,
+    });
+
     const { onHoverChange, onVisualizationClick, settings } = this.props;
     if (onHoverChange) {
       marker.on("mousemove", e => {

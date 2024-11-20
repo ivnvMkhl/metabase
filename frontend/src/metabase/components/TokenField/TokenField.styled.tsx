@@ -13,7 +13,7 @@ export const TokenFieldContainer = styled.ul`
   background-color: var(--mb-color-bg-white);
   overflow-x: auto;
   overflow-y: auto;
-  border-radius: ${space(1)};
+  border-radius: 0;
   border: 1px solid var(--mb-color-border);
 `;
 

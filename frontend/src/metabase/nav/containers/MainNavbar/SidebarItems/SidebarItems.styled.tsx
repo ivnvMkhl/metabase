@@ -29,6 +29,7 @@ export const ExpandToggleButton = styled(TreeNode.ExpandToggleButton)`
 `;
 
 const activeColorCSS = css`
+  border-radius: 0 !important;
   color: var(--mb-color-brand);
 `;
 
@@ -43,7 +44,7 @@ export const NodeRoot = styled(TreeNode.Root)<{
   background-color: ${props =>
     props.isSelected ? alpha("brand", 0.2) : "unset"};
   padding-left: ${props => props.depth}rem;
-  border-radius: 4px;
+  border-radius: 0;
 
   ${ExpandToggleButton} {
     ${props => props.isSelected && activeColorCSS}

@@ -1,6 +1,6 @@
 :root {
   --input-border-color: var(--mb-color-border);
-  --input-border-radius: 8px;
+  --input-border-radius: 0;
 }
 
 .input {

@@ -17,6 +17,7 @@ export const LinkRoot = styled(Link, {
   opacity: ${props => (props.disabled ? "0.4" : "")};
   pointer-events: ${props => (props.disabled ? "none" : "")};
   transition: opacity 0.3s linear;
+  border-radius: 0 !important;
 
   ${focusOutlineStyle("brand")};
 

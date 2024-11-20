@@ -30,7 +30,7 @@ export const SelectButtonRoot = styled.button<SelectButtonRootProps>`
       hasValue && highlighted ? color("brand") : color("border")};
   background-color: ${({ hasValue, highlighted }) =>
     hasValue && highlighted ? color("brand") : color("bg-white")};
-  border-radius: ${space(1)};
+  border-radius: 0;
   font-weight: 700;
   min-width: 104px;
   transition: all 200ms;

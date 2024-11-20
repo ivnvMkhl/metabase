@@ -87,7 +87,7 @@ export const SliderTooltip = styled.div`
   background: var(--mb-color-bg-black);
   color: var(--mb-color-text-white);
   display: block;
-  border-radius: ${space(1)};
+  border-radius: 0;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 

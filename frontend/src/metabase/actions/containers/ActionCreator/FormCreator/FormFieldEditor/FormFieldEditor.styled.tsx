@@ -11,7 +11,7 @@ const DRAG_HANDLE_SIZE = 12;
 export const FormFieldContainer = styled.div`
   background-color: var(--mb-color-bg-white);
   border: 1px solid var(--mb-color-border);
-  border-radius: ${space(1)};
+  border-radius: 0;
   overflow: hidden;
 `;
 

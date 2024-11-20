@@ -58,7 +58,7 @@ export const InputField = styled.input<InputProps>`
   font-family: inherit;
   color: var(--mb-color-text-dark);
   border: 1px solid var(--mb-color-border);
-  border-radius: ${space(1)};
+  border-radius: 0;
   background-color: ${props =>
     props.readOnly ? "var(--mb-color-bg-light)" : "var(--mb-color-bg-white)"};
   outline: none;

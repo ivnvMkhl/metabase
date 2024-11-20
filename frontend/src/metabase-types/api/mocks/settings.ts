@@ -139,7 +139,7 @@ export const createMockSettings = (
   "admin-email": "admin@metabase.test",
   "anon-tracking-enabled": false,
   "application-colors": {},
-  "application-font": "Lato",
+  "application-font": "Manrope",
   "application-font-files": [],
   // eslint-disable-next-line no-literal-metabase-strings -- This is a mock
   "application-name": "Metabase",

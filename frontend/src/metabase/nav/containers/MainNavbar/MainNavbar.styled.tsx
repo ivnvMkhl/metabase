@@ -140,7 +140,7 @@ export const PaddedSidebarLink = styled(SidebarLink)`
 
 export const AddYourOwnDataLink = styled(SidebarLink)`
   background: var(--mb-color-brand);
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--mb-color-text-white);
   margin: ${space(1)};
   padding: 2px 6px;

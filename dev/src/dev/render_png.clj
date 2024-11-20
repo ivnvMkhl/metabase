@@ -105,7 +105,7 @@
     (doseq [{:keys [card dashcard result] :as dashboard-result} dashboard-results]
       (let [render    (if card
                         (render/render-pulse-card :inline (pulse/defaulted-timezone card) card dashcard result)
-                        {:content     [:div {:style (style/style {:font-family             "Lato"
+                        {:content     [:div {:style (style/style {:font-family             "Manrope"
                                                                   :font-size               "0.875em"
                                                                   :font-weight             "400"
                                                                   :font-style              "normal"
@@ -170,7 +170,7 @@
       [:tr
        (cellfn nil)
        (cellfn
-        [:div {:style (style/style {:font-family             "Lato"
+        [:div {:style (style/style {:font-family             "Manrope"
                                     :font-size               "13px" #_ "0.875em"
                                     :font-weight             "400"
                                     :font-style              "normal"

@@ -131,7 +131,7 @@ const createTemplate = ({ rows, vizSettings }: SmartScalarSeriesOpts) =>
         rawSeries={[series]}
         dashcardSettings={{}}
         renderingContext={{
-          fontFamily: "Lato",
+          fontFamily: "Manrope",
           formatValue: (value, options) =>
             formatStaticValue(value, options ?? {}),
           getColor: createColorGetter(colors),

@@ -97,6 +97,36 @@ export const defaultFontFiles = ({ baseUrl = "./" } = {}) => {
         font-display: swap;
       }
 
+      /* Manrope-400 */
+      @font-face {
+        font-family: Manrope;
+        src: local("Manrope Regular"), local("Manrope-Regular"),
+        url("${basePath}/Manrope/Manrope-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* Manrope-700 */
+      @font-face {
+        font-family: Manrope;
+        src: local("Manrope Bold"), local("Manrope-Bold"),
+        url("${basePath}/Manrope/Manrope-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* Manrope-400 */
+      @font-face {
+        font-family: Manrope;
+        src: local("Manrope Black"), local("Manrope-Black"),
+        url("${basePath}/Manrope/Manrope-Black.ttf") format("truetype");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
       @font-face {
         font-family: Montserrat;
         src: local("Montserrat Regular"), local("Montserrat-Regular"),

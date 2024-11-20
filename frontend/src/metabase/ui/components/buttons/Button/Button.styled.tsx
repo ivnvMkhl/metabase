@@ -18,6 +18,7 @@ export const getButtonOverrides = (): MantineThemeOverride["components"] => ({
     styles: (theme: MantineTheme, { compact }: ButtonStylesParams) => {
       return {
         root: {
+          borderRadius: '0',
           height: "auto",
           padding: compact ? `${rem(3)} ${rem(7)}` : `${rem(11)} ${rem(15)}`,
           fontSize: theme.fontSizes.md,

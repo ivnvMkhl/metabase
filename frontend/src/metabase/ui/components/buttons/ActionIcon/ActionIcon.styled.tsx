@@ -6,6 +6,7 @@ export const getActionIconOverrides =
       variants: {
         subtle: theme => ({
           root: {
+            borderRadius: '0',
             color: theme.fn.themeColor("text-light"),
             "&:hover": {
               color: theme.fn.themeColor("text-medium"),

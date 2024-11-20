@@ -1,5 +1,5 @@
 :root {
-  --default-button-border-radius: 6px;
+  --default-button-border-radius: 0;
 }
 
 .Button {

@@ -9,7 +9,7 @@ import {
 import { Icon } from "metabase/ui";
 
 const activeInputCSS = css`
-  border-radius: 6px;
+  border-radius: 0;
   justify-content: flex-start;
 `;
 

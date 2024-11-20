@@ -20,7 +20,7 @@ export const BaseSidebarItemRoot = styled.div<{
   align-items: center;
   overflow: hidden;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 0;
   cursor: pointer;
 
   ${({ disabled }) => disabled && disabledStyle}
@@ -57,7 +57,7 @@ export const IconContainer = styled.div`
   height: 36px;
   margin-right: 10px;
   border: 1px solid #f2f2f2;
-  border-radius: 8px;
+  border-radius: 0;
 `;
 
 export const CloseIconContainer = styled.span`

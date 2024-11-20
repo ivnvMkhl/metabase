@@ -7,7 +7,7 @@
   (doseq [[s expected] {"Roboto"           "Roboto"
                         "Merriweather"     "Merriweather"
                         "Open_Sans"        "Open Sans"
-                        "Lato"             "Lato"
+                        "Manrope"             "Manrope"
                         "Noto_Sans"        "Noto Sans"
                         "Roboto_Slab"      "Roboto Slab"
                         "Source_Sans_Pro"  "Source Sans Pro"
@@ -34,6 +34,6 @@
 
 (deftest available-font-predicate-test
   (testing "A valid font on the system returns `true`."
-    (is (u.fonts/available-font? "Lato")))
+    (is (u.fonts/available-font? "Manrope")))
   (testing "An invalid font on the system returns `false`."
     (is (not (u.fonts/available-font? "Comic Sans")))))

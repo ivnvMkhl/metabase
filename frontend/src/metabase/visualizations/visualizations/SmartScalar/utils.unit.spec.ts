@@ -37,7 +37,7 @@ const createMockMeasureText = (width: number, height: number) => {
 };
 
 const getAutoPrecisionOptions = (width: number) => {
-  return { fontFamily: "Lato", fontWeight: 400, width };
+  return { fontFamily: "Manrope", fontWeight: 400, width };
 };
 
 describe("SmartScalar > utils", () => {

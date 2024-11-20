@@ -45,6 +45,8 @@ export const getSelectInputOverrides = (
 ): Record<string, CSSObject> => {
   return {
     root: {
+
+      borderRadius: '0',
       [["label", "description", "error"]
         .map(name => `&:has(.${getStylesRef(name)})`)
         .join(",")]: {

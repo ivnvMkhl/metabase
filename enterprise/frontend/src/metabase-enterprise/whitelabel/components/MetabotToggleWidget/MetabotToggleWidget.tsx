@@ -2,7 +2,7 @@ import { t } from "ttag";
 
 import { ImageToggle } from "../ImageToggle";
 
-import { MetabotIcon } from "./MetabotToggleWidget.styled";
+// import { MetabotIcon } from "./MetabotToggleWidget.styled";
 import type { MetabotSetting } from "./types";
 
 interface MetabotToggleWidgetProps {
@@ -22,7 +22,7 @@ export const MetabotToggleWidget = ({
       value={isEnabled}
       onChange={onChange}
     >
-      <MetabotIcon variant={isEnabled ? "happy" : "sad"} />
+      {/* <MetabotIcon variant={isEnabled ? "happy" : "sad"} /> */}
     </ImageToggle>
   );
 };

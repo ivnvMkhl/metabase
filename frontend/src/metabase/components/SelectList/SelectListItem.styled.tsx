@@ -37,7 +37,7 @@ export const BaseItemRoot = styled.li<{
   align-items: center;
   cursor: pointer;
   padding: ${props => VERTICAL_PADDING_BY_SIZE[props.size]} 0.5rem;
-  border-radius: 6px;
+  border-radius: 0;
   margin-bottom: 2px;
 
   &:last-child {

@@ -11,7 +11,7 @@ export const EditorContainer = styled.div<{
 }>`
   border: 1px solid;
   border-color: var(--mb-color-border);
-  border-radius: ${space(1)};
+  border-radius: 0;
   display: flex;
   position: relative;
   margin: ${space(1)} 0;

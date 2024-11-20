@@ -18,7 +18,7 @@ export const CardLink = styled(TextLink)`
   padding: 1.25rem;
   background-color: var(--mb-color-bg-white);
   box-shadow: 0 3px 10px var(--mb-color-shadow);
-  border-radius: 6px;
+  border-radius: 0;
 `;
 
 export const CardText = styled.span`

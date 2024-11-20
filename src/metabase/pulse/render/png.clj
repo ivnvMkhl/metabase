@@ -80,7 +80,7 @@
 
 (def ^:private get-lato
   (letfn [(get-lato* []
-            (let [lato-names #{"Lato Regular" "Lato-Regular" "lato" "lato-regular"}
+            (let [lato-names #{"Lato Regular" "Lato-Regular" "Manrope" "lato-regular"}
                   env        (GraphicsEnvironment/getLocalGraphicsEnvironment)
                   fonts      (.getAllFonts env)
                   font       ^Font (some #(when (lato-names (.getName ^Font %)) %) fonts)]

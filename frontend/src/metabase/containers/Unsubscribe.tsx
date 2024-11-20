@@ -7,7 +7,6 @@ import { NotFound } from "metabase/components/ErrorPages";
 import LoadingAndErrorWrapper from "metabase/components/LoadingAndErrorWrapper";
 import LogoIcon from "metabase/components/LogoIcon";
 import {
-  StyledMetabotLogo,
   LayoutBody,
   LayoutCard,
   LayoutIllustration,
@@ -205,7 +204,7 @@ function UnsubscribeRoot({ children }: { children: JSX.Element }) {
 function ErrorDisplay() {
   return (
     <Stack align="center" spacing="xs" aria-label="error message">
-      <StyledMetabotLogo variant="sad" />
+      {/* <StyledMetabotLogo variant="sad" /> */}
       <Text
         fw={700}
         fz="md"

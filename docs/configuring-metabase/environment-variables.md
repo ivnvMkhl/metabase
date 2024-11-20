@@ -139,7 +139,7 @@ Path or URL to favicon file.
 
 Only available on Metabase [Pro](https://www.metabase.com/product/pro) and [Enterprise](https://www.metabase.com/product/enterprise) plans.<br>
 Type: string<br>
-Default: `"Lato"`<br>
+Default: `"Manrope"`<br>
 Since: v44.0
 
 Change the font used in Metabase. See [fonts](../configuring-metabase/fonts.md).

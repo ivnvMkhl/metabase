@@ -3,7 +3,7 @@ import type { ColorGetter } from "metabase/visualizations/types";
 
 export const getStaticChartTheme = (
   getColor: ColorGetter,
-  fontFamily = "Lato",
+  fontFamily = "Manrope",
 ): RowChartTheme => {
   return {
     axis: {

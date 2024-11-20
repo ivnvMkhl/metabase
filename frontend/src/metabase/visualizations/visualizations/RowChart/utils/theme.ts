@@ -6,7 +6,7 @@ import type { RowChartTheme } from "metabase/visualizations/shared/components/Ro
 import { getVisualizationTheme } from "metabase/visualizations/shared/utils/theme";
 
 export const useRowChartTheme = (
-  fontFamily: string = "Lato",
+  fontFamily: string = "Manrope",
 ): RowChartTheme => {
   const theme = useMantineTheme();
 

@@ -111,7 +111,7 @@ const StaticRowChart = ({ data, settings, getColor }: StaticRowChartProps) => {
       xmlns="http://www.w3.org/2000/svg"
       width={WIDTH}
       height={fullChartHeight}
-      fontFamily="Lato"
+      fontFamily="Manrope"
     >
       {legend.items.length > 0 && (
         <Legend

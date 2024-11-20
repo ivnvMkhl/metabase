@@ -14,7 +14,7 @@ type TestDatum = { y: string; x: number; x1: number };
 
 const testFont: ChartFont = {
   size: 10,
-  family: "Lato",
+  family: "Manrope",
   weight: 400,
   color: "grey",
 };

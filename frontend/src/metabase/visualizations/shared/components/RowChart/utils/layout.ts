@@ -24,7 +24,7 @@ export const getMaxWidth = (
     ...formattedYTicks.map(tick =>
       measureTextWidth(tick, {
         size: `${ticksFont.size}px`,
-        family: "Lato",
+        family: "Manrope",
         weight: String(ticksFont.weight ?? 400),
       }),
     ),

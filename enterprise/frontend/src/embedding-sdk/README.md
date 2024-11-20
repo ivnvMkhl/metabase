@@ -191,7 +191,7 @@ const config = {
 // See the "Customizing appearance" section for more information
 const theme = {
   // Optional: Specify a font to use from the set of fonts supported by Metabase
-  fontFamily: "Lato",
+  fontFamily: "Manrope",
 
   // Optional: Match your application's color scheme
   colors: {
@@ -457,7 +457,7 @@ const theme = {
   // Specify a font to use from the set of fonts supported by Metabase.
   // You can set the font to "Custom" to use the custom font
   // configured in your Metabase instance.
-  fontFamily: "Lato",
+  fontFamily: "Manrope",
 
   // Override the base font size for every component.
   // This does not usually need to be set, as the components

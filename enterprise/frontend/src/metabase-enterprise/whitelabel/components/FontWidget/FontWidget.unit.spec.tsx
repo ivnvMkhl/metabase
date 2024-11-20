@@ -12,7 +12,7 @@ describe("FontWidget", () => {
     const props = getProps();
 
     render(<FontWidget {...props} />);
-    await clickSelect("Lato");
+    await clickSelect("Manrope");
     await userEvent.click(screen.getByText("Lora"));
 
     expect(props.onChange).toHaveBeenCalledWith("Lora");
@@ -30,7 +30,7 @@ describe("FontWidget", () => {
     await clickSelect("Lora");
     await userEvent.click(screen.getByText("Custom…"));
 
-    expect(props.onChange).toHaveBeenCalledWith("Lato");
+    expect(props.onChange).toHaveBeenCalledWith("Manrope");
     expect(props.onChangeSetting).toHaveBeenCalledWith(FONT_FILES_KEY, []);
   });
 
@@ -53,7 +53,7 @@ describe("FontWidget", () => {
 const getProps = (opts?: Partial<FontWidgetProps>): FontWidgetProps => ({
   setting: getSetting(),
   settingValues: getSettingValues(),
-  availableFonts: ["Lato", "Lora"],
+  availableFonts: ["Manrope", "Lora"],
   onChange: jest.fn(),
   onChangeSetting: jest.fn(),
   ...opts,
@@ -61,14 +61,14 @@ const getProps = (opts?: Partial<FontWidgetProps>): FontWidgetProps => ({
 
 const getSetting = (opts?: Partial<FontSetting>): FontSetting => ({
   value: null,
-  default: "Lato",
+  default: "Manrope",
   ...opts,
 });
 
 const getSettingValues = (
   opts?: Partial<FontSettingValues>,
 ): FontSettingValues => ({
-  "application-font": "Lato",
+  "application-font": "Manrope",
   "application-font-files": null,
   ...opts,
 });

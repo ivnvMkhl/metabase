@@ -50,7 +50,7 @@ const ScalarValue = ({
       text: value,
       targetHeight: height,
       targetWidth: width,
-      fontFamily: fontFamily ?? "Lato",
+      fontFamily: fontFamily ?? "Manrope",
       fontWeight: 700,
       unit: "rem",
       step: 0.2,

@@ -2,7 +2,7 @@ export type MetabaseFontFamily =
   | "Roboto"
   | "Merriweather"
   | "Open Sans"
-  | "Lato"
+  | "Manrope"
   | "Noto Sans"
   | "Roboto Slab"
   | "Source Sans Pro"

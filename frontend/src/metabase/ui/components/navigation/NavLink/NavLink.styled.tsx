@@ -17,6 +17,7 @@ export const getNavLinkOverrides = (): MantineThemeOverride["components"] => ({
     variants: {
       default: theme => ({
         root: {
+          borderRadius: "0 !important",
           "&:hover": {
             backgroundColor: theme.fn.themeColor("brand-lighter"),
           },
@@ -41,6 +42,7 @@ export const getNavLinkOverrides = (): MantineThemeOverride["components"] => ({
       "mb-light": theme => ({
         root: {
           "&:hover": {
+            borderRadius: "0 !important",
             backgroundColor: theme.fn.themeColor("brand-lighter"),
           },
 

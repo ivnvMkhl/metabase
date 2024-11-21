@@ -45,8 +45,7 @@ export const getSelectInputOverrides = (
 ): Record<string, CSSObject> => {
   return {
     root: {
-
-      borderRadius: '0',
+      borderRadius: "0",
       [["label", "description", "error"]
         .map(name => `&:has(.${getStylesRef(name)})`)
         .join(",")]: {
@@ -124,15 +123,21 @@ export const getSelectItemsOverrides = (
   size: MantineSize | number,
 ): Record<string, CSSObject> => {
   return {
+    dropdown: {
+      borderRadius: "0",
+    },
     itemsWrapper: {
       padding: "0.75rem",
+      borderRadius: "0",
     },
     item: {
       color: theme.fn.themeColor("text-dark"),
       fontSize: getItemFontSize(size),
       lineHeight: getItemLineHeight(size),
       padding: theme.spacing.sm,
+      borderRadius: 0,
       "&[data-hovered]": {
+        borderRadius: 0,
         color: theme.fn.themeColor("brand"),
         backgroundColor: theme.fn.themeColor("brand-lighter"),
       },

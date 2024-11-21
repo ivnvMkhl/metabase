@@ -15,7 +15,7 @@ export const ColumnItemRoot = styled.div<ColumnItemRootProps>`
   display: flex;
   align-items: center;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background: var(--mb-color-bg-white);
 
   &.dragging {

@@ -44,6 +44,7 @@ export const getMultiSelectOverrides =
         values: {
           boxSizing: "border-box",
           minHeight: getSize({ size, sizes: SIZES }),
+          borderRadius: 0,
           marginLeft: 0,
           gap: theme.spacing.xs,
           padding: theme.spacing.xs,
@@ -87,7 +88,7 @@ export const getMultiSelectOverrides =
           height: getSize({ size, sizes: VALUE_SIZES }),
           fontWeight: "bold",
           fontSize: getSize({ size, sizes: theme.fontSizes }),
-          borderRadius: theme.radius.xs,
+          borderRadius: 0,
           color: theme.fn.themeColor("brand"),
           backgroundColor: theme.fn.themeColor("bg-medium"),
         },

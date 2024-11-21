@@ -10,7 +10,7 @@ export const Content = styled.div`
   display: flex;
   flex: auto;
   align-items: center;
-  border-radius: 6px;
+  border-radius: 0;
 
   ${BucketPickerPopover.TriggerButton} {
     height: 100%;

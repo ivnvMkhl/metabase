@@ -6,7 +6,7 @@ import { color } from "metabase/lib/colors";
 
 export const StatusRoot = styled.div`
   width: 16rem;
-  border-radius: 6px;
+  border-radius: 0;
   background-color: var(--mb-color-bg-white);
   box-shadow: 0 1px 12px var(--mb-color-shadow);
   overflow: hidden;

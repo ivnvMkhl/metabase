@@ -31,7 +31,7 @@ export const TabButtonInput = styled.input<TabButtonProps & { value: string }>`
   bottom: 0;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0;
   outline: none;
   background-color: transparent;
   color: inherit;

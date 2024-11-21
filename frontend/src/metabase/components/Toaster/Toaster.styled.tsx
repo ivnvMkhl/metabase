@@ -14,7 +14,7 @@ export const ToasterContainer = styled.div<ToasterContainerProps>`
   max-width: 388px;
   background-color: var(--mb-color-text-dark);
   padding: 16px;
-  border-radius: 6px;
+  border-radius: 0;
   ${props =>
     props.fixed
       ? `position: fixed;
@@ -41,7 +41,7 @@ export const ToasterButton = styled.button`
   display: flex;
   padding: 7px 18px;
   background-color: ${() => alpha(color("bg-white"), 0.1)};
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--mb-color-text-white);
   width: 90px;
   height: fit-content;

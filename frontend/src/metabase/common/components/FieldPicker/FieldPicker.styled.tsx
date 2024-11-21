@@ -33,7 +33,7 @@ export const Label = styled(HoverParent)`
   align-items: center;
   padding: 0 0.5em;
   padding-right: 0;
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   min-height: 2.25rem;
 

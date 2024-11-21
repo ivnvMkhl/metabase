@@ -12,7 +12,7 @@ export const IconContainer = styled.div<{ color: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: 0;
   width: 20px;
   height: 20px;
   color: var(--mb-color-text-white);

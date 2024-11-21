@@ -7,7 +7,7 @@ export const StepRoot = styled.section`
   padding: 2rem;
   margin-bottom: 1.75rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-white);
 `;
 

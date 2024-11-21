@@ -26,7 +26,7 @@ export const DashCardActionsPanelContainer = styled("div", {
   transform: translateY(-50%);
   top: 0;
   right: 20px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 1px 3px rgb(0 0 0 / 13%);
   cursor: default;
   transition: opacity 200ms;

@@ -13,7 +13,7 @@ export const StepToggleContainer = styled.div`
   margin: 0 2rem 1.25rem 0;
   padding: 1rem;
   border: 2px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const StepToggle = styled(Toggle)`

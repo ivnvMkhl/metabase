@@ -11,7 +11,7 @@ export const RowToggleIconRoot = styled.div`
   align-items: center;
   cursor: pointer;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 0;
   transition: all 200ms;
   outline: none;
 

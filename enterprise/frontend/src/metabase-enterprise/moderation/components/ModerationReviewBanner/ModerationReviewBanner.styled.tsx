@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: start;
   column-gap: 0.5rem;
-  border-radius: 8px;
+  border-radius: 0;
 `;
 
 export const TextContainer = styled.div`

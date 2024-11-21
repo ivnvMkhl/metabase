@@ -10,7 +10,7 @@ export const TokenFieldItem = styled.li<{
   padding: 0.5rem 0.75rem;
 
   height: 46px;
-  border-radius: 0.5rem;
+  border-radius: 0;
   color: ${({ isValid }) => (isValid ? color("brand") : color("error"))};
   background-color: ${() => alpha("brand", 0.2)};
 `;

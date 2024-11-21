@@ -6,5 +6,5 @@ export const NewVersionIndicator = styled.span`
   font-size: 0.75em;
   font-weight: bold;
   background-color: var(--mb-color-brand);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;

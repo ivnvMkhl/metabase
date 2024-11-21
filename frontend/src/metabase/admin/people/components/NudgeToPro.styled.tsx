@@ -25,7 +25,7 @@ export const ProLink = styled(ExternalLink)`
   font-weight: 700;
   padding: 0.75rem 1rem;
   border: 1px solid var(--mb-color-brand);
-  border-radius: 0.5rem;
+  border-radius: 0;
   color: var(--mb-color-brand);
   width: fit-content;
 

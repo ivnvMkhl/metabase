@@ -8,7 +8,7 @@ export const EmailFormRoot = styled.div`
   position: relative;
   padding: 2rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const EmailFormLabel = styled.div`

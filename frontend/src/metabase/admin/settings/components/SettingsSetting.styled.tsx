@@ -4,7 +4,7 @@ import { color } from "metabase/lib/colors";
 
 export const SettingRoot = styled.li`
   padding: 0.5rem 1rem 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const SettingContent = styled.div`

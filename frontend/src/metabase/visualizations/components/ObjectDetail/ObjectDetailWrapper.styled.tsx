@@ -21,7 +21,7 @@ export const RootModal = styled(Modal)`
     max-height: 95vh;
     width: 95vw;
     border: 1px solid var(--mb-color-border);
-    border-radius: 0.5rem;
+    border-radius: 0;
   }
 
   ${ObjectDetailBodyWrapper} {

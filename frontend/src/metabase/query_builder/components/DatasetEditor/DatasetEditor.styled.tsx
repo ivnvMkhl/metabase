@@ -38,7 +38,7 @@ export const TableHeaderColumnName = styled.div<{ isSelected: boolean }>`
   font-weight: bold;
   cursor: pointer;
   border: 1px solid var(--mb-color-brand);
-  border-radius: 8px;
+  border-radius: 0;
   transition: all 0.25s;
 
   ${props =>

@@ -19,7 +19,7 @@
 }
 
 .ListSectionHeaderCursor {
-  border-radius: 8px;
+  border-radius: 0;
   outline: 2px solid var(--mb-color-focus);
   outline-offset: -4px;
 }

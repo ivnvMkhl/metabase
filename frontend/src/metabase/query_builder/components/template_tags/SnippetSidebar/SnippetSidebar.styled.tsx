@@ -54,7 +54,7 @@ export const AddSnippetIcon = styled(Icon)<AddSnippetIconProps>`
   color: var(--mb-color-brand);
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
 
   &:hover {
     background-color: var(--mb-color-bg-light);

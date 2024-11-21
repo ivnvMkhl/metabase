@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const TargetTrigger = styled.div`
   display: flex;
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   width: 100%;
   margin-bottom: 0.5rem;
   font-weight: bold;

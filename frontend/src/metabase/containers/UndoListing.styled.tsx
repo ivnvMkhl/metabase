@@ -72,7 +72,7 @@ export const UndoButton = styled(Link)`
   background-color: ${() => alpha(color("bg-white"), 0.1)};
   padding: 4px 12px;
   margin-left: ${space(1)};
-  border-radius: 8px;
+  border-radius: 0;
 
   :hover {
     background-color: ${() => alpha(color("bg-white"), 0.3)};

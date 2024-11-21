@@ -15,7 +15,7 @@ export const StoreIconWrapper = styled.div`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   color: var(--mb-color-text-white);
   transition: all 300ms ease-in-out;

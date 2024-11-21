@@ -14,5 +14,5 @@ export const ChartSettingMessage = styled.div`
   background: var(--mb-color-bg-light);
   color: var(--mb-color-text-light);
   font-weight: 700;
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;

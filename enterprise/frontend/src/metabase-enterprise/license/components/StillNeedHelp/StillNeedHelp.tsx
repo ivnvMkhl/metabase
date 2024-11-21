@@ -5,7 +5,7 @@ import { Text, Anchor } from "metabase/ui";
 
 const Container = styled.div`
   background: var(--mb-color-bg-light);
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding: 0.75rem 1rem;
   margin-top: 1.5rem;
 `;

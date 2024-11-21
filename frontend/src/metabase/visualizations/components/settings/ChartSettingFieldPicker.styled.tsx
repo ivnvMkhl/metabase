@@ -15,7 +15,7 @@ export const ChartSettingFieldPickerRoot = styled.div<ChartSettingFieldPickerRoo
   display: flex;
   align-items: center;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding-right: 1rem;
   padding-left: 0.5rem;
   background: var(--mb-color-bg-white);

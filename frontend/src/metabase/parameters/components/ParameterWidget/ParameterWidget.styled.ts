@@ -44,7 +44,7 @@ export const ParameterContainer = styled.div<ParameterContainerProps>`
   border: 1px solid
     ${props =>
       props.isEditingParameter ? color("brand") : "var(--mb-color-border)"};
-  border-radius: 0.5rem;
+  border-radius: 0;
   cursor: pointer;
   font-weight: bold;
   min-width: 170px;

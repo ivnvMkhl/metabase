@@ -26,7 +26,7 @@ export const HeaderMessage = styled.div`
 
 export const SectionRoot = styled.section`
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   margin-bottom: 2rem;
 
   ${breakpointMinLarge} {

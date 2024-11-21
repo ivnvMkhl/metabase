@@ -13,7 +13,7 @@ export const ErrorPageRoot = styled.div<{ bordered?: boolean }>`
     css`
       border: 1px solid var(--mb-color-border);
     `}
-  border-radius: 0.5rem;
+  border-radius: 0;
   overflow: hidden;
 `;
 

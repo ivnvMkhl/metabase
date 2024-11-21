@@ -4,7 +4,7 @@ export const ColorRangeRoot = styled.div`
   display: flex;
   height: 2rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   cursor: pointer;
   overflow: hidden;
 `;

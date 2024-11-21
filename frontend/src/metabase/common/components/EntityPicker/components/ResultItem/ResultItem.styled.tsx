@@ -38,7 +38,7 @@ export const ChunkyListItem = styled.button<{
 
 export const ChunkyList = styled.div`
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;

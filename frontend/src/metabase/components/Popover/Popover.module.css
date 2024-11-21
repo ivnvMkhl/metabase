@@ -38,7 +38,7 @@
   pointer-events: none;
   line-height: 1.26;
   font-size: 12px;
-  border-radius: 6px;
+  border-radius: 0;
   box-shadow: 0 4px 10px var(--mb-color-shadow);
   overflow-wrap: break-word;
 }

@@ -28,7 +28,7 @@ export const EmptyStateTooltip = styled.div`
   min-width: 16.75rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-text-dark);
 `;
 

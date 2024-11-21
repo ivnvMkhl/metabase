@@ -24,7 +24,7 @@ export const ExpandButton = styled(Button)`
   margin: 0;
   padding: 0.25rem;
   background-color: var(--mb-color-bg-collection-browser-expand-button);
-  border-radius: 2px;
+  border-radius: 0;
   color: var(--mb-color-text-collection-browser-expand-button);
 
   &:hover {

@@ -13,7 +13,7 @@ export const SelectPickerButton = styled.button<SelectPickerButtonProps>`
   width: 100%;
   height: 95px;
   border: 1px solid var(--mb-color-filter);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: ${props =>
     props.isSelected ? color("filter") : color("bg-white")};
 `;

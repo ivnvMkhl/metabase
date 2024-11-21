@@ -35,7 +35,7 @@ interface OptionItemProps {
 }
 
 export const OptionItem = styled.div<OptionItemProps>`
-  border-radius: 4px;
+  border-radius: 0;
   cursor: pointer;
   display: inline-block;
   margin: 0;

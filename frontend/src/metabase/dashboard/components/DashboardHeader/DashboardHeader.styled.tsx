@@ -61,6 +61,7 @@ DashboardHeaderButton.defaultProps = {
 
 export const SectionMenuItem = styled(Menu.Item)`
   background-color: ${() => darken(color("bg-medium"), 0.1)};
+  border-radius: 0;
 
   &:hover {
     background-color: var(--mb-color-brand);

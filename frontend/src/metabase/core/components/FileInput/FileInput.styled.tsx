@@ -29,7 +29,7 @@ export const InputField = styled.input<InputFieldProps>`
 
 export const InputButton = styled.span`
   border: 1px solid var(--mb-color-border);
-  border-radius: 6px;
+  border-radius: 0;
   box-sizing: border-box;
   color: var(--mb-color-text-dark);
   cursor: pointer;

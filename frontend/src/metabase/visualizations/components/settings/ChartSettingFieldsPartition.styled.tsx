@@ -26,7 +26,7 @@ interface DroppableContainerProps {
 export const DroppableContainer = styled.div<DroppableContainerProps>`
   background-color: ${({ isDragSource }) =>
     isDragSource ? "var(--mb-color-border)" : "none"};
-  border-radius: 0.5rem;
+  border-radius: 0;
   min-height: 40px;
   position: relative;
 `;
@@ -35,7 +35,7 @@ export const EmptyColumnPlaceholder = styled.div`
   position: absolute;
   width: 100%;
   padding: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-light);
   color: var(--mb-color-text-medium);
 `;

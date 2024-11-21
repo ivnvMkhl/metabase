@@ -4,7 +4,7 @@ export const FileInput = styled.input`
   &::file-selector-button {
     padding: 0.75rem 1rem;
     margin-right: 1rem;
-    border-radius: 4px;
+    border-radius: 0;
     border: 1px solid var(--mb-color-border);
     background-color: var(--mb-color-bg-white);
     color: var(--mb-color-text-dark);

@@ -61,7 +61,7 @@ export const BackButtonContainer = styled.span`
 `;
 
 export const SaveButton = styled(MantineButton)<ButtonProps>`
-  border-radius: 8px;
+  border-radius: 0;
 
   &[data-disabled="true"] {
     pointer-events: all;

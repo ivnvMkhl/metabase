@@ -41,7 +41,7 @@ export const AlertRoot = styled.div<AlertRootProps>`
           border: 1px solid ${colorsByVariant.border[props.variant]};
         `
       : null};
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: ${props => colorsByVariant.background[props.variant]};
 `;
 

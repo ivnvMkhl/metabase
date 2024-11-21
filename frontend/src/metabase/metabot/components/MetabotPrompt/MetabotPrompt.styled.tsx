@@ -11,7 +11,7 @@ export const PromptSection = styled.div`
   padding: 1rem;
   align-items: center;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   box-shadow: 0 2px 2px var(--mb-color-shadow);
   background-color: var(--mb-color-bg-white);
 `;

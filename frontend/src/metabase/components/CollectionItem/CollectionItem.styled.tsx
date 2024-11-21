@@ -9,7 +9,7 @@ export const ItemLink = styled(Link)`
   display: block;
   background-color: var(--mb-color-bg-medium);
   color: var(--mb-color-text-medium);
-  border-radius: 8px;
+  border-radius: 0;
 
   &:hover {
     color: var(--mb-color-brand);
@@ -26,7 +26,7 @@ export const IconContainer = styled.div`
   background-color: ${props =>
     props.color ? color(props.color) : "var(--mb-color-bg-dark)"};
   margin-right: ${space(1)};
-  border-radius: 6px;
+  border-radius: 0;
 `;
 
 export const CardContent = styled.div`

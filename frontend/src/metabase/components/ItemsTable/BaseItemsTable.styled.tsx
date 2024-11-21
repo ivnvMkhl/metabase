@@ -19,7 +19,7 @@ export const Table = styled.table<{ isInDragLayer?: boolean }>`
   background-color: var(--mb-color-bg-white);
   table-layout: fixed;
   border-collapse: unset;
-  border-radius: 0.5rem;
+  border-radius: 0;
   overflow: hidden;
 
   thead {

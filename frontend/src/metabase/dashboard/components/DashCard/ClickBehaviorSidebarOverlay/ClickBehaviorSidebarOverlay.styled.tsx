@@ -14,7 +14,7 @@ export const Button = styled.button<{ isActive: boolean }>`
   display: flex;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: bold;
   cursor: pointer;
   background-color: ${({ isActive }) =>

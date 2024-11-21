@@ -310,7 +310,7 @@
   padding: 1em;
   background-color: var(--mb-color-bg-light);
   border: 1px solid var(--mb-color-border);
-  border-radius: 2px;
+  border-radius: 0;
   white-space: pre-wrap;
 }
 

@@ -67,7 +67,7 @@ export const CardRoot = styled(Link)`
   padding: 1.75rem;
   align-items: center;
   border: 1px solid var(--mb-color-border);
-  border-radius: 6px;
+  border-radius: 0;
   cursor: ${props => (props.to ? "pointer" : "default")};
 
   ${props => props.to && cardRootHoverStyles}

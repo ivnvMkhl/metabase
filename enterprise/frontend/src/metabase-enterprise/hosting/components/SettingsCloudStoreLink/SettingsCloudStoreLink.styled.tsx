@@ -15,7 +15,7 @@ export const Link = styled(ExternalLink)`
   font-weight: bold;
   background-color: var(--mb-color-brand);
   padding: 12px 18px;
-  border-radius: 6px;
+  border-radius: 0;
 
   &:hover {
     opacity: 0.88;

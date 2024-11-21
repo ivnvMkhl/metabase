@@ -62,7 +62,7 @@ export const AdminMobileNavBarItems = styled.ul`
 export const AdminExitLink = styled(Link)`
   border: 1px solid ${() => alpha("bg-white", 0.2)};
   padding: 12px 18px;
-  border-radius: 5px;
+  border-radius: 0;
   font-weight: 700;
   font-size: 13px;
   transition: all 200ms;

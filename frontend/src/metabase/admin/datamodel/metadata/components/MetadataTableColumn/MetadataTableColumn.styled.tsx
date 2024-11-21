@@ -9,7 +9,7 @@ export const ColumnContainer = styled.section`
   margin-bottom: 1.5rem;
   display: flex;
   border: 1px solid var(--mb-color-border);
-  border-radius: 8px;
+  border-radius: 0;
 
   &:last-child {
     margin-bottom: 0;

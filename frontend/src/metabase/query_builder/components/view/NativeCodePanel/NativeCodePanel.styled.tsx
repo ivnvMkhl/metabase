@@ -17,7 +17,7 @@ export const CodeContainer = styled.pre<CodeContainerProps>`
   border: 1px solid
     ${props =>
       props.isHighlighted ? color("brand") : "var(--mb-color-border)"};
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: ${props =>
     props.isHighlighted
       ? "var(--mb-color-brand-light)"

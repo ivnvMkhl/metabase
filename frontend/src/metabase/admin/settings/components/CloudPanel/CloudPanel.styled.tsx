@@ -4,7 +4,7 @@ import { alpha } from "metabase/lib/colors";
 
 export const MigrationCard = styled.div`
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding: 2rem 3rem;
 `;
 

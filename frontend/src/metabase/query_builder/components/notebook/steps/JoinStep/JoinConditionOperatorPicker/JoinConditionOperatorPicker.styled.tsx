@@ -35,7 +35,7 @@ export const OperatorPickerButton = styled.button<{
 
   font-size: 16px;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 0;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   transition: background 300ms linear, border 300ms linear, color 300ms linear;
 `;

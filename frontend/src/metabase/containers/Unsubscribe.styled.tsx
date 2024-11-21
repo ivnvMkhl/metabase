@@ -46,7 +46,7 @@ export const LayoutCard = styled.div`
   padding: 2.5rem 1.5rem;
   background-color: var(--mb-color-bg-white);
   box-shadow: 0 1px 15px var(--mb-color-shadow);
-  border-radius: 6px;
+  border-radius: 0;
   min-height: 20rem;
   min-width: 35rem;
   display: flex;

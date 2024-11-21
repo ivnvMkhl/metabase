@@ -54,7 +54,7 @@ interface EditModeProps {
   isMobile: boolean;
 }
 export const EditModeContainer = styled(TextCardWrapper)<EditModeProps>`
-  border-radius: 8px;
+  border-radius: 0;
   pointer-events: all;
 
   * {
@@ -277,7 +277,7 @@ export const ReactMarkdownStyleWrapper = styled.div`
     line-height: 20px;
     padding: 0 0.25em;
     background-color: var(--mb-color-bg-light);
-    border-radius: 8px;
+    border-radius: 0;
   }
 
   .text-card-markdown pre code {
@@ -320,7 +320,7 @@ export const TextInput = styled.textarea<TextAreaProps>`
   flex: 1 0 auto;
   background-color: var(--mb-color-bg-light);
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: none;
   font-size: 1.143em;
   height: inherit;

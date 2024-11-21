@@ -10,7 +10,7 @@ interface Props {
 export const StepRoot = styled.section<Props>`
   position: relative;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding: 1rem 2rem;
   margin-bottom: 1.75rem;
   background-color: ${props =>

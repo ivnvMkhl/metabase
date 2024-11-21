@@ -7,7 +7,7 @@ export const HostingLink = styled(ExternalLink)`
   white-space: nowrap;
   padding: 0.5rem 1rem;
   border: 1px solid var(--mb-color-brand);
-  border-radius: 0.5rem;
+  border-radius: 0;
 
   &:hover {
     color: var(--mb-color-text-white);

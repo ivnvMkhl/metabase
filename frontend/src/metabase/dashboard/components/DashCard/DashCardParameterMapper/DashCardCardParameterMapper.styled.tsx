@@ -49,7 +49,7 @@ export const TargetButton = styled.div<{ variant: string }>`
   background-color: var(--mb-color-bg-white);
   cursor: pointer;
   border: 2px solid var(--mb-color-brand);
-  border-radius: 8px;
+  border-radius: 0;
   min-height: 30px;
   padding: 0.25em 0.5em;
   margin: 0 0.25rem;

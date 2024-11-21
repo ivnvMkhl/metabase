@@ -43,7 +43,7 @@ export const DefaultParameterValueWidget = styled(ParameterValueWidget)`
   padding: 0.5rem;
   font-weight: 700;
   color: var(--mb-color-text-medium);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-white);
   border: 2px solid var(--mb-color-border);
 `;

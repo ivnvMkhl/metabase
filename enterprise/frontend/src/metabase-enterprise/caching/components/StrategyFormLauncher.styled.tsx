@@ -46,7 +46,7 @@ export const StyledLauncher = styled(
     ref?: MutableRefObject<HTMLDivElement>;
   } & ButtonProps
 >`
-  border-radius: 0.5rem;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   flex-flow: row nowrap;

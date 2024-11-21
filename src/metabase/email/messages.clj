@@ -92,7 +92,7 @@
        "color: #fff; "
        "border: 1px solid " color "; "
        "background-color: " color "; "
-       "border-radius: 4px;"))
+       "border-radius: 0;"))
 
 ;;; Various Context Helper Fns. Used to build Stencil template context
 

@@ -9,6 +9,6 @@ export const OnLatestVersionMessage = styled.div`
   color: var(--mb-color-text-white);
   font-weight: bold;
   border: 1px solid var(--mb-color-brand);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-brand);
 `;

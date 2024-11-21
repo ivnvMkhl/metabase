@@ -56,7 +56,7 @@ export const ActionCardContainer = styled.div`
 
 const baseActionCardStyles = css`
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 0;
 `;
 
 export const CodeBlock = styled.pre`

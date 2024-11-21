@@ -43,7 +43,7 @@ export const StoreButtonLink = styled(ExternalLink)`
   font-weight: bold;
   padding: 0.75rem 1rem;
   margin-top: 1rem;
-  border-radius: 6px;
+  border-radius: 0;
 
   &:hover {
     opacity: 0.88;

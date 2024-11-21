@@ -9,7 +9,7 @@ const getNoColumnStyle = (theme: Theme, isOpen = false) => css`
   padding: 8px 20px;
   color: ${alpha(theme.fn.themeColor("brand"), 0.45)};
   border: 2px solid ${isOpen ? "var(--mb-color-brand)" : alpha("brand", 0.45)};
-  border-radius: 4px;
+  border-radius: 0;
 
   &:hover,
   &:focus {
@@ -20,7 +20,7 @@ const getNoColumnStyle = (theme: Theme, isOpen = false) => css`
 const getHasColumnStyle = (theme: Theme, isOpen = false) => css`
   min-height: 39px;
   padding: 6px 16px 6px 10px;
-  border-radius: 6px;
+  border-radius: 0;
   background-color: ${isOpen ? lighten("brand", 0.1) : color("brand")};
 
   &:hover,

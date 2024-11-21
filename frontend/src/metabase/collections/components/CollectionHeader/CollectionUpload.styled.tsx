@@ -24,7 +24,7 @@ export const NewBadge = styled.div`
   color: var(--mb-color-brand);
   background-color: var(--mb-color-brand-lighter);
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: 0;
 `;
 
 export const InfoModalContainer = styled.div`

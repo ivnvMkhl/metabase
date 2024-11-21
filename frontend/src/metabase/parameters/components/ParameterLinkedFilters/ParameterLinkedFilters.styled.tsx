@@ -20,7 +20,7 @@ export const SectionMessageLink = styled.span`
 
 export const ParameterRoot = styled.div`
   margin-bottom: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-light);
 `;
 

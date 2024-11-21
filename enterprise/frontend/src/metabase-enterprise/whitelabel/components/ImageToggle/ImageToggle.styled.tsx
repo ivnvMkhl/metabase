@@ -5,7 +5,7 @@ export const ToggleRoot = styled.div`
   flex: 1 1 auto;
   max-width: 33rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const ImageContainer = styled.div`

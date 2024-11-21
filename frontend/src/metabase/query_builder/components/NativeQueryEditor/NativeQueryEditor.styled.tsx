@@ -25,12 +25,12 @@ const getAceEditorStyles = () => css`
   .ace_searchbtn,
   .ace_button {
     background-color: var(--mb-color-bg-white);
-    border-radius: 5px;
+    border-radius: 0;
     border: 1px solid var(--mb-color-border);
   }
 
   .ace_nomatch {
-    border-radius: 5px;
+    border-radius: 0;
     outline: 1px solid var(--mb-color-error);
   }
 
@@ -100,7 +100,7 @@ export const aceEditorStyles = css`
   .ace_editor.ace_autocomplete {
     border: none;
     box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
+    border-radius: 0;
     background-color: white;
     color: #4c5773;
     width: 520px;
@@ -153,7 +153,7 @@ export const DragHandle = styled.div`
   width: 100px;
   height: 5px;
   background-color: ${() => darken("border", 0.03)};
-  border-radius: 4px;
+  border-radius: 0;
 `;
 
 export const EditorRoot = styled.div`

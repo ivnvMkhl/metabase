@@ -6,7 +6,7 @@ import { space } from "metabase/styled-components/theme";
 export const UserPickerRoot = styled.div`
   padding: 0.125rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const UserPickerOption = styled.div`

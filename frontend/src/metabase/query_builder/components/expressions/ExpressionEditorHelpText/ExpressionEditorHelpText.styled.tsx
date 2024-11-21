@@ -52,7 +52,7 @@ export const BlockSubtitleText = styled.div`
 export const ExampleCode = styled.div`
   padding: 0.5rem;
   background-color: var(--mb-color-bg-light);
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 0.8125rem;
   line-height: 1.065rem;
   font-family: ${monospaceFontFamily};

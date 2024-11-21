@@ -32,7 +32,7 @@ export const EditableText = styled(EditableTextBase)`
 export const CompactSelect = styled(Select)`
   ${SelectButton.Root} {
     border: none;
-    border-radius: 6px;
+    border-radius: 0;
     min-width: 80px;
     color: var(--mb-color-text-medium);
   }

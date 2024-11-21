@@ -16,7 +16,7 @@ export interface MenuItemProps {
 export const MenuItemContent = styled.div<MenuItemProps>`
   display: flex;
   align-items: center;
-  border-radius: 0.5em;
+  border-radius: 0;
   cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
   color: ${props =>
     color(props.disabled ? "text-light" : props.color || "text-dark")};

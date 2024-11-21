@@ -14,7 +14,7 @@ export const MetabotMessageRoot = styled.div`
 export const MetabotText = styled.div`
   display: inline-block;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-light);
   color: var(--mb-color-text-medium);
   font-weight: bold;

@@ -24,7 +24,7 @@ export const FieldListItem = styled.li`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 1rem 0.5rem;
 
   ${FieldTitle} {

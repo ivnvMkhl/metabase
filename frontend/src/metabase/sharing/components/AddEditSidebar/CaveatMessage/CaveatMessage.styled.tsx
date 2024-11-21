@@ -10,7 +10,7 @@ export const CaveatText = styled(Text)`
   padding: 0.8rem;
   color: var(--mb-color-text-dark);
   line-height: 1.25rem;
-  border-radius: 8px;
+  border-radius: 0;
   background-color: ${() => alpha("accent4", 0.05)};
   border: 1px solid ${() => color("accent4")};
 `;

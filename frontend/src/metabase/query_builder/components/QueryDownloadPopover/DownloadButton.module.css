@@ -4,7 +4,7 @@
 
 .DownloadButton {
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background: var(--mb-color-bg-white);
   color: var(--mb-color-text-dark);
 }

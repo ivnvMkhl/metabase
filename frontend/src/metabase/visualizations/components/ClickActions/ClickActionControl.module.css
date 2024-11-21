@@ -2,7 +2,7 @@ button.horizontalButton {
   display: flex;
   flex: auto;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0;
   border: none;
   text-align: start;
   padding: 0.5rem;

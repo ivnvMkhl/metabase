@@ -44,7 +44,7 @@ export const ModalErrorMessage = styled.div`
   color: var(--mb-color-text-medium);
   padding: 1rem;
   border: 1px solid var(--mb-color-error);
-  border-radius: 0.5rem;
+  border-radius: 0;
 `;
 
 export const ModalEmptyState = styled.div`
@@ -54,7 +54,7 @@ export const ModalEmptyState = styled.div`
   align-items: center;
   padding: 2rem;
   border: 1px solid var(--mb-color-border);
-  border-radius: 0.5rem;
+  border-radius: 0;
   background-color: var(--mb-color-bg-light);
   color: var(--mb-color-text-medium);
   font-weight: bold;

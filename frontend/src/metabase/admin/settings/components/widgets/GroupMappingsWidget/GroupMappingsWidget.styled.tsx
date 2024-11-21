@@ -11,7 +11,7 @@ export const GroupMappingsWidgetAndErrorRoot = styled.div`
 
 export const GroupMappingsWidgetRoot = styled.div`
   border: 1px solid var(--mb-color-border);
-  border-radius: 8px;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   max-width: 720px;

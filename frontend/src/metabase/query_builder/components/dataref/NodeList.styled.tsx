@@ -29,7 +29,7 @@ interface NodeListItemLinkProps {
 }
 
 export const NodeListItemLink = styled.a<NodeListItemLinkProps>`
-  border-radius: 8px;
+  border-radius: 0;
   align-items: center;
   color: var(--mb-color-brand);
   font-weight: 700;

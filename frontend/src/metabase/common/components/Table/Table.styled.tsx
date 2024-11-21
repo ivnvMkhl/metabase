@@ -8,7 +8,7 @@ export const StyledTable = styled(Table)`
   border-spacing: 0;
   margin-block: 1rem;
   position: relative;
-  border-radius: 0.5rem;
+  border-radius: 0;
   border: 1px solid var(--mb-color-border);
 
   th {

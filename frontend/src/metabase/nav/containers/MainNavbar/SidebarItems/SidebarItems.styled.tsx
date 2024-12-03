@@ -12,11 +12,22 @@ export const SidebarIcon = styled(Icon)<{
   color?: string | null;
   isSelected: boolean;
 }>`
-  ${props =>
-    !props.color &&
-    css`
-      color: var(--mb-color-brand);
-    `}
+  ${props => {
+    if (props.isSelected) {
+      return (
+        !props.color &&
+        css`
+          color: var(--mb-color-brand-light);
+        `
+      );
+    }
+    return (
+      !props.color &&
+      css`
+        color: var(--mb-color-brand);
+      `
+    );
+  }}
 `;
 
 SidebarIcon.defaultProps = {
@@ -34,15 +45,14 @@ const activeColorCSS = css`
 `;
 
 function getTextColor(isSelected: boolean) {
-  return isSelected ? color("brand") : darken(color("text-medium"), 0.25);
+  return isSelected ? color("white") : darken(color("text-medium"), 0.25);
 }
 
 export const NodeRoot = styled(TreeNode.Root)<{
   hasDefaultIconStyle?: boolean;
 }>`
   color: ${props => getTextColor(props.isSelected)};
-  background-color: ${props =>
-    props.isSelected ? alpha("brand", 0.2) : "unset"};
+  background-color: ${props => (props.isSelected ? "brand" : "unset")};
   padding-left: ${props => props.depth}rem;
   border-radius: 0;
 
@@ -51,15 +61,16 @@ export const NodeRoot = styled(TreeNode.Root)<{
   }
 
   &:hover {
-    background-color: ${() => alpha("brand", 0.35)};
-    color: var(--mb-color-brand);
+    background-color: ${() => alpha("brand", 0.75)};
+    color: var(--mb-color-brand-light);
 
     ${ExpandToggleButton} {
-      color: var(--mb-color-brand);
+      color: var(--mb-color-brand-light);
     }
 
     ${SidebarIcon} {
       ${props => props.hasDefaultIconStyle && activeColorCSS};
+      color: var(--mb-color-brand-light);
     }
   }
 `;

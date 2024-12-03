@@ -16,7 +16,7 @@ import type { ResponsiveProps } from "./utils";
 import { getContainerQuery } from "./utils";
 
 export const Table = styled.table<{ isInDragLayer?: boolean }>`
-  background-color: var(--mb-color-bg-white);
+  background-color: transparent;
   table-layout: fixed;
   border-collapse: unset;
   border-radius: 0;
@@ -24,16 +24,16 @@ export const Table = styled.table<{ isInDragLayer?: boolean }>`
 
   thead {
     th {
-      border-top: 1px solid var(--mb-color-border);
+      border-top: 0 solid var(--mb-color-border);
 
       &:first-of-type {
-        border-start-start-radius: 8px;
-        border-inline-start: 1px solid var(--mb-color-border);
+        border-start-start-radius: 0;
+        border-inline-start: 0 solid var(--mb-color-border);
       }
 
       &:last-child {
-        border-start-end-radius: 8px;
-        border-inline-end: 1px solid var(--mb-color-border);
+        border-start-end-radius: 0;
+        border-inline-end: 0 solid var(--mb-color-border);
       }
     }
   }
@@ -176,14 +176,14 @@ export const TBody = styled.tbody`
   td {
     border: none;
     background-color: transparent;
-    border-top: 1px solid var(--mb-color-border);
+    border-top: 0 solid var(--mb-color-border);
 
     &:first-of-type {
-      border-inline-start: 1px solid var(--mb-color-border);
+      border-inline-start: 0 solid var(--mb-color-border);
     }
 
     &:last-child {
-      border-inline-end: 1px solid var(--mb-color-border);
+      border-inline-end: 0 solid var(--mb-color-border);
     }
   }
 
@@ -193,14 +193,14 @@ export const TBody = styled.tbody`
 
   tr:last-child {
     td {
-      border-bottom: 1px solid var(--mb-color-border);
+      border-bottom: 0 solid var(--mb-color-border);
 
       &:last-child {
-        border-end-end-radius: 8px;
+        border-end-end-radius: 0;
       }
 
       &:first-of-type {
-        border-end-start-radius: 8px;
+        border-end-start-radius: 0;
       }
     }
   }

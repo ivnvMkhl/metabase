@@ -54,7 +54,7 @@ export const defaultColors = {
 };
 
 const userColorPalette: typeof defaultColors | null = JSON.parse(
-  localStorage.getItem("colorPalette") ?? "null",
+  `{"brand":"#e20613","summarize":"#332e2f","filter":"#dadada","accent0":"#e20613","accent1":"#332e2f","accent2":"#971917","accent3":"#d98201","accent4":"#e1b200","accent5":"#4b86a8","accent6":"#19203a","accent7":"#aba597","admin-navbar":"#ff0000","white":"#FFFFFF","success":"#8da915","danger":"#b21210","error":"#ff0000","warning":"#981917","text-dark":"#000000","text-medium":"#3e3f41","text-light":"#d0d2d7","text-white":"#FFFFFF","bg-black":"#2E353B","bg-dark":"#93A1AB","bg-medium":"#EDF2F5","bg-light":"#F9FBFC","bg-white":"#FFFFFF","bg-yellow":"#e8e8e8","bg-night":"#42484E","bg-error":"#ED6E6E55","shadow":"#ffffff","border":"#000000","saturated-blue":"#143759","saturated-green":"#6d6647","saturated-purple":"#641c34","saturated-red":"#ff0000","saturated-yellow":"#f7ba0e"}`,
 );
 
 export const colors = { ...defaultColors, ...userColorPalette };

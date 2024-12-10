@@ -1,5 +1,7 @@
 import type { FC, ReactNode } from "react";
 
+import { ExportPageOverlay } from "../ExportPageOverlay/ExportPageOverlay";
+
 import {
   ContainerPadding,
   DashboardHeader,
@@ -29,6 +31,7 @@ const ExportContainer: FC<ExportContainerProps> = ({
         orientation={orientation}
         id={EXPORT_NODE_ID}
       >
+        <ExportPageOverlay />
         <ExportContainerWrapper>
           <DashboardHeader>{title}</DashboardHeader>
           {children}

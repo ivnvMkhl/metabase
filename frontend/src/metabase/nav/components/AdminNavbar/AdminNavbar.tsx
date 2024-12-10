@@ -19,7 +19,6 @@ import {
   AdminExitLink,
   AdminLogoContainer,
   AdminLogoLink,
-  AdminLogoText,
   AdminNavbarItems,
   AdminNavbarRoot,
   AdminMobileNavbar,
@@ -48,7 +47,7 @@ export const AdminNavbar = ({
         <AdminLogoContainer>
           <LogoIcon className={cx(CS.textBrand, CS.my2)} dark />
           {/* eslint-disable-next-line no-literal-metabase-strings -- Metabase settings */}
-          <AdminLogoText>{t`Metabase Admin`}</AdminLogoText>
+          {/* <AdminLogoText>{t`Metabase Admin`}</AdminLogoText> */}
         </AdminLogoContainer>
       </AdminLogoLink>
 

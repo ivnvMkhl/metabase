@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Link from "metabase/core/components/Link";
 import { alpha, color, darken } from "metabase/lib/colors";
 import {
-  breakpointMaxLarge,
+  // breakpointMaxLarge,
   breakpointMaxMedium,
 } from "metabase/styled-components/theme";
 
@@ -80,21 +80,21 @@ export const AdminExitLink = styled(Link)`
 export const AdminLogoContainer = styled.div`
   display: flex;
   min-width: 32px;
-  max-width: 20rem;
+  max-width: 32px;
   overflow: hidden;
   height: 32px;
   align-items: center;
   justify-content: center;
 `;
 
-export const AdminLogoText = styled.div`
-  margin-left: 1rem;
-  font-weight: 700;
+// export const AdminLogoText = styled.div`
+//   margin-left: 1rem;
+//   font-weight: 700;
 
-  ${breakpointMaxLarge} {
-    display: none;
-  }
-`;
+//   ${breakpointMaxLarge} {
+//     display: none;
+//   }
+// `;
 
 export const AdminLogoLink = styled(Link)`
   cursor: pointer;

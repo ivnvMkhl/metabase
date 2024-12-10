@@ -11,6 +11,7 @@ export const ContainerPadding = styled.div<{
 
   padding: 25mm 10mm 20mm 20mm;
   background: white;
+  position: relative;
   width: ${({ format, orientation }) => {
     switch (format) {
       case "a4": {

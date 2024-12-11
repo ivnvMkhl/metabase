@@ -2,11 +2,11 @@ import type { MouseEvent } from "react";
 import { t } from "ttag";
 
 import EntityMenu from "metabase/components/EntityMenu";
-import { trackExportDashboardToPDF } from "metabase/dashboard/analytics";
-import { DASHBOARD_PDF_EXPORT_ROOT_ID } from "metabase/dashboard/constants";
+// import { trackExportDashboardToPDF } from "metabase/dashboard/analytics";
+// import { DASHBOARD_PDF_EXPORT_ROOT_ID } from "metabase/dashboard/constants";
 import type { DashboardFullscreenControls } from "metabase/dashboard/types";
 import { PLUGIN_DASHBOARD_HEADER } from "metabase/plugins";
-import { saveDashboardPdf } from "metabase/visualizations/lib/save-dashboard-pdf";
+// import { saveDashboardPdf } from "metabase/visualizations/lib/save-dashboard-pdf";
 import type { Dashboard } from "metabase-types/api";
 
 export const DashboardActionMenu = (props: { items: any[] }) => (
@@ -41,20 +41,20 @@ export const getExtraButtons = ({
     event: `Dashboard;Fullscreen Mode;${!isFullscreen}`,
   });
 
-  extraButtons.push({
-    title:
-      Array.isArray(dashboard.tabs) && dashboard.tabs.length > 1
-        ? t`Export tab as PDF`
-        : t`Export as PDF`,
-    icon: "document",
-    testId: "dashboard-export-pdf-button",
-    action: async () => {
-      const cardNodeSelector = `#${DASHBOARD_PDF_EXPORT_ROOT_ID}`;
-      await saveDashboardPdf(cardNodeSelector, dashboard.name).then(() => {
-        trackExportDashboardToPDF(dashboard.id);
-      });
-    },
-  });
+  // extraButtons.push({
+  //   title:
+  //     Array.isArray(dashboard.tabs) && dashboard.tabs.length > 1
+  //       ? t`Export tab as PDF`
+  //       : t`Export as PDF`,
+  //   icon: "document",
+  //   testId: "dashboard-export-pdf-button",
+  //   action: async () => {
+  //     const cardNodeSelector = `#${DASHBOARD_PDF_EXPORT_ROOT_ID}`;
+  //     await saveDashboardPdf(cardNodeSelector, dashboard.name).then(() => {
+  //       trackExportDashboardToPDF(dashboard.id);
+  //     });
+  //   },
+  // });
 
   extraButtons.push({
     title: "Экспортировать для печати",

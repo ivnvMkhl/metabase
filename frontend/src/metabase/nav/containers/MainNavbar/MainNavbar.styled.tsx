@@ -35,6 +35,7 @@ export const Sidebar = styled.aside<{ isOpen: boolean }>`
   overflow: auto;
   overflow-x: hidden;
   z-index: 4;
+  border-inline-end: 0 !important;
 
   ${props => (props.isOpen ? openSidebarCSS : closeSidebarCSS)};
 

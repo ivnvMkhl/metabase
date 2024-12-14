@@ -10,7 +10,7 @@
 
 :global(.custom-map-marker-tooltip) {
   position: relative;
-  left: 0;
+  left: -3px;
   top: -5px;
   z-index: 10 !important;
   box-shadow: 2px 2px 10px gray;
@@ -29,4 +29,9 @@
 
 :global(.custom-map-marker-wrapper:hover) {
   z-index: 999999 !important;
+}
+
+:global(.custom-map-marker-icon) {
+  min-width: 32px;
+  min-height: 32px;
 }

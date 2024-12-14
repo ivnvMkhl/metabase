@@ -3,12 +3,16 @@ import { Component } from "react";
 import { t } from "ttag";
 import _ from "underscore";
 
+import ColorPicker from "metabase/core/components/ColorPicker";
 import ColorRangeSelector from "metabase/core/components/ColorRangeSelector";
 import { getAccentColors } from "metabase/lib/colors/groups";
 import MetabaseSettings from "metabase/lib/settings";
 import { MultiSelect } from "metabase/ui";
 import { HIDE_TOOLTIP_KEYS_PREFIX } from "metabase/visualizations/components/ChartTooltip/KeyValuePairChartTooltip/KeyValuePairChartTooltip";
-import { STATIC_TOOLTIP_FIELD_KEY } from "metabase/visualizations/components/LeafletMarkerPinMap";
+import {
+  DEFAULT_MAP_PIN_COLOR,
+  STATIC_TOOLTIP_FIELD_KEY,
+} from "metabase/visualizations/components/LeafletMarkerPinMap";
 import { ChartSettingsError } from "metabase/visualizations/lib/errors";
 import { columnSettings } from "metabase/visualizations/lib/settings/column";
 import {
@@ -354,6 +358,20 @@ export class Map extends Component {
             .map(({ value }) => value),
           clearable: true,
         };
+      },
+      getHidden: (series, vizSettings) =>
+        !PIN_MAP_TYPES.has(vizSettings["map.type"]),
+    },
+    "map.pinColor": {
+      title: "Выберите цвет маркера",
+      widget: ({ data, onChange, value }) => (
+        <ColorPicker value={value} data={data} onChange={onChange} />
+      ),
+      getDefault: ([{ card, data }], vizSettings) => {
+        if (vizSettings["map.pinColor"]) {
+          return vizSettings["map.pinColor"];
+        }
+        return DEFAULT_MAP_PIN_COLOR;
       },
       getHidden: (series, vizSettings) =>
         !PIN_MAP_TYPES.has(vizSettings["map.type"]),

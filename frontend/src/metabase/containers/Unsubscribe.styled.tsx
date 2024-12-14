@@ -34,7 +34,7 @@ export const LayoutIllustration = styled.div<{
     isDefault && `hue-rotate(${hueRotate("brand")}deg)`};
   background-image: ${({ backgroundImageSrc }) =>
     `url("${backgroundImageSrc}")`};
-  background-size: 400px;
+  background-size: 25vw;
   background-repeat: no-repeat;
   background-position: bottom 24px right 24px;
 `;

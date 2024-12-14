@@ -6,18 +6,35 @@ import { isPK } from "metabase-lib/v1/types/utils/isa";
 import LeafletMap from "./LeafletMap";
 
 export const STATIC_TOOLTIP_FIELD_KEY = "$_pin_name";
+export const DEFAULT_MAP_PIN_COLOR = "#81827E";
 
-const getIconWidthTooltip = text => {
+const getIconWidthTooltip = (text, color = DEFAULT_MAP_PIN_COLOR) => {
   const CUSTOM_MARKER = text
     ? `
   <div class="custom-map-marker">
-    <img src="app/assets/img/pin.png" width="28" height="32"/>
+    <svg height="32px" width="32px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 512 512"  xml:space="preserve" class="custom-map-marker-icon">
+      <g>
+        <path class="st0" d="M256,0C160.798,0,83.644,77.155,83.644,172.356c0,97.162,48.158,117.862,101.386,182.495
+          C248.696,432.161,256,512,256,512s7.304-79.839,70.97-157.148c53.228-64.634,101.386-85.334,101.386-182.495
+          C428.356,77.155,351.202,0,256,0z M256,231.921c-32.897,0-59.564-26.668-59.564-59.564s26.668-59.564,59.564-59.564
+          c32.896,0,59.564,26.668,59.564,59.564S288.896,231.921,256,231.921z" fill="${color}"/>
+      </g>
+    </svg>
     <span class="custom-map-marker-tooltip">${text}</span>
   </div>
   `
     : `
   <div class="custom-map-marker">
-    <img src="app/assets/img/pin.png" width="20" height="32"/>
+      <svg height="32px" width="32px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 512 512"  xml:space="preserve" class="custom-map-marker-icon">
+      <g>
+        <path class="st0" d="M256,0C160.798,0,83.644,77.155,83.644,172.356c0,97.162,48.158,117.862,101.386,182.495
+          C248.696,432.161,256,512,256,512s7.304-79.839,70.97-157.148c53.228-64.634,101.386-85.334,101.386-182.495
+          C428.356,77.155,351.202,0,256,0z M256,231.921c-32.897,0-59.564-26.668-59.564-59.564s26.668-59.564,59.564-59.564
+          c32.896,0,59.564,26.668,59.564,59.564S288.896,231.921,256,231.921z" fill="${color}"/>
+      </g>
+    </svg>
   </div>
   `;
 
@@ -52,6 +69,7 @@ export default class LeafletMarkerPinMap extends LeafletMap {
       const { pinMarkerLayer } = this;
       const { points, data, settings } = this.props;
       const columnsMetadata = data.cols;
+
       const staticLabelFielName =
         settings?.["map.staticLabelsColumn"] ?? STATIC_TOOLTIP_FIELD_KEY;
       const prevStaticLabelFielName =
@@ -59,13 +77,15 @@ export default class LeafletMarkerPinMap extends LeafletMap {
         STATIC_TOOLTIP_FIELD_KEY;
       const staticLabelChanged =
         staticLabelFielName !== prevStaticLabelFielName;
+      const pinColorHasChanged = this.pinColor !== settings?.["map.pinColor"];
       const pinNameIndex = columnsMetadata.findIndex(
         col => col.name === staticLabelFielName,
       );
       const markerNames =
         pinNameIndex > -1 ? data.rows.map(row => row[pinNameIndex]) : undefined;
 
-      if (staticLabelChanged) {
+      if (staticLabelChanged || pinColorHasChanged) {
+        this.pinColor = settings?.["map.pinColor"];
         pinMarkerLayer.clearLayers();
       }
       const markers = pinMarkerLayer.getLayers();
@@ -96,7 +116,7 @@ export default class LeafletMarkerPinMap extends LeafletMap {
 
   _createMarker = (rowIndex, markerName) => {
     const marker = L.marker([0, 0], {
-      icon: getIconWidthTooltip(markerName),
+      icon: getIconWidthTooltip(markerName, this.pinColor),
     });
 
     const { onHoverChange, onVisualizationClick, settings } = this.props;

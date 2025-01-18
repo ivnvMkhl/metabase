@@ -111,7 +111,7 @@ export const PivotTableCell = styled.div<PivotTableCellProps>`
   font-weight: ${props => (props.isBold ? "bold" : "normal")};
   cursor: ${props => (props.onClick ? "pointer" : "default")};
   color: ${getColor};
-  box-shadow: -1px 0 0 0 ${getBorderColor} inset;
+  border-right: 1px solid ${getBorderColor};
   border-bottom: 1px solid
     ${props =>
       props.isBorderedHeader
@@ -138,7 +138,7 @@ interface PivotTableTopLeftCellsContainerProps {
 export const PivotTableTopLeftCellsContainer = styled.div<PivotTableTopLeftCellsContainerProps>`
   display: flex;
   align-items: flex-end;
-  box-shadow: -1px 0 0 0 ${getBorderColor} inset;
+  border-right: 1px solid ${getBorderColor};
   background-color: ${props =>
     getCellBackgroundColor({
       isEmphasized: true,

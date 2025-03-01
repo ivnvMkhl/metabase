@@ -142,26 +142,27 @@
             [admin-email])
           (t2/select-fn-set :email 'User, :is_superuser true, :is_active true, {:order-by [[:id :asc]]})))
 
-(defn send-user-joined-admin-notification-email!
-  "Send an email to the `invitor` (the Admin who invited `new-user`) letting them know `new-user` has joined."
-  [new-user & {:keys [google-auth?]}]
-  {:pre [(map? new-user)]}
-  (let [recipients (all-admin-recipients)]
-    (email/send-message!
-     {:subject      (str (if google-auth?
-                           (trs "{0} created a {1} account" (:common_name new-user) (app-name-trs))
-                           (trs "{0} accepted their {1} invite" (:common_name new-user) (app-name-trs))))
-      :recipients   recipients
-      :message-type :html
-      :message      (stencil/render-file "metabase/email/user_joined_notification"
-                                         (merge (common-context)
-                                                {:logoHeader        true
-                                                 :joinedUserName    (or (:first_name new-user) (:email new-user))
-                                                 :joinedViaSSO      google-auth?
-                                                 :joinedUserEmail   (:email new-user)
-                                                 :joinedDate        (t/format "EEEE, MMMM d" (t/zoned-date-time)) ; e.g. "Wednesday, July 13".
-                                                 :adminEmail        (first recipients)
-                                                 :joinedUserEditUrl (str (public-settings/site-url) "/admin/people")}))})))
+(defn send-user-joined-admin-notification-email! "disabled" [] )
+;; (defn send-user-joined-admin-notification-email!
+;;   "Send an email to the `invitor` (the Admin who invited `new-user`) letting them know `new-user` has joined."
+;;   [new-user & {:keys [google-auth?]}]
+;;   {:pre [(map? new-user)]}
+;;   (let [recipients (all-admin-recipients)]
+;;     (email/send-message!
+;;      {:subject      (str (if google-auth?
+;;                            (trs "{0} created a {1} account" (:common_name new-user) (app-name-trs))
+;;                            (trs "{0} accepted their {1} invite" (:common_name new-user) (app-name-trs))))
+;;       :recipients   recipients
+;;       :message-type :html
+;;       :message      (stencil/render-file "metabase/email/user_joined_notification"
+;;                                          (merge (common-context)
+;;                                                 {:logoHeader        true
+;;                                                  :joinedUserName    (or (:first_name new-user) (:email new-user))
+;;                                                  :joinedViaSSO      google-auth?
+;;                                                  :joinedUserEmail   (:email new-user)
+;;                                                  :joinedDate        (t/format "EEEE, MMMM d" (t/zoned-date-time)) ; e.g. "Wednesday, July 13".
+;;                                                  :adminEmail        (first recipients)
+;;                                                  :joinedUserEditUrl (str (public-settings/site-url) "/admin/people")}))})))
 
 (defn send-password-reset-email!
   "Format and send an email informing the user how to reset their password."
@@ -186,27 +187,28 @@
       :message-type :html
       :message      message-body})))
 
-(mu/defn send-login-from-new-device-email!
-  "Format and send an email informing the user that this is the first time we've seen a login from this device. Expects
-  login history information as returned by `metabase.models.login-history/human-friendly-infos`."
-  [{user-id :user_id, :keys [timestamp], :as login-history} :- [:map [:user_id pos-int?]]]
-  (let [user-info    (or (t2/select-one ['User [:first_name :first-name] :email :locale] :id user-id)
-                         (throw (ex-info (tru "User {0} does not exist" user-id)
-                                         {:user-id user-id, :status-code 404})))
-        user-locale  (or (:locale user-info) (i18n/site-locale))
-        timestamp    (u.date/format-human-readable timestamp user-locale)
-        context      (merge (common-context)
-                            {:first-name (:first-name user-info)
-                             :device     (:device_description login-history)
-                             :location   (:location login-history)
-                             :timestamp  timestamp})
-        message-body (stencil/render-file "metabase/email/login_from_new_device"
-                                          context)]
-    (email/send-message!
-     {:subject      (trs "We''ve Noticed a New {0} Login, {1}" (app-name-trs) (:first-name user-info))
-      :recipients   [(:email user-info)]
-      :message-type :html
-      :message      message-body})))
+(mu/defn send-login-from-new-device-email! "disabled" [])
+;; (mu/defn send-login-from-new-device-email!
+;;   "Format and send an email informing the user that this is the first time we've seen a login from this device. Expects
+;;   login history information as returned by `metabase.models.login-history/human-friendly-infos`."
+;;   [{user-id :user_id, :keys [timestamp], :as login-history} :- [:map [:user_id pos-int?]]]
+;;   (let [user-info    (or (t2/select-one ['User [:first_name :first-name] :email :locale] :id user-id)
+;;                          (throw (ex-info (tru "User {0} does not exist" user-id)
+;;                                          {:user-id user-id, :status-code 404})))
+;;         user-locale  (or (:locale user-info) (i18n/site-locale))
+;;         timestamp    (u.date/format-human-readable timestamp user-locale)
+;;         context      (merge (common-context)
+;;                             {:first-name (:first-name user-info)
+;;                              :device     (:device_description login-history)
+;;                              :location   (:location login-history)
+;;                              :timestamp  timestamp})
+;;         message-body (stencil/render-file "metabase/email/login_from_new_device"
+;;                                           context)]
+;;     (email/send-message!
+;;      {:subject      (trs "We''ve Noticed a New {0} Login, {1}" (app-name-trs) (:first-name user-info))
+;;       :recipients   [(:email user-info)]
+;;       :message-type :html
+;;       :message      message-body})))
 
 (defn- admin-or-ee-monitoring-details-emails
   "Find emails for users that have an interest in monitoring the database.
@@ -240,78 +242,81 @@
                                                  [:= :is_active true]
                                                  [:in :id user-ids]]}))))))
 
-(defn send-persistent-model-error-email!
-  "Format and send an email informing the user about errors in the persistent model refresh task."
-  [database-id persisted-infos trigger]
-  {:pre [(seq persisted-infos)]}
-  (let [database (:database (first persisted-infos))
-        emails (admin-or-ee-monitoring-details-emails database-id)
-        timezone (some-> database qp.timezone/results-timezone-id t/zone-id)
-        context {:database-name (:name database)
-                 :errors
-                 (for [[idx persisted-info] (m/indexed persisted-infos)
-                       :let [card (:card persisted-info)
-                             collection (or (:collection card)
-                                            (collection/root-collection-with-ui-details nil))]]
-                   {:is-not-first (not= 0 idx)
-                    :error (:error persisted-info)
-                    :card-id (:id card)
-                    :card-name (:name card)
-                    :collection-name (:name collection)
-                    ;; February 1, 2022, 3:10 PM
-                    :last-run-at (t/format "MMMM d, yyyy, h:mm a z" (t/zoned-date-time (:refresh_begin persisted-info) timezone))
-                    :last-run-trigger trigger
-                    :card-url (urls/card-url (:id card))
-                    :collection-url (urls/collection-url (:id collection))
-                    :caching-log-details-url (urls/tools-caching-details-url (:id persisted-info))})}
-        message-body (stencil/render-file "metabase/email/persisted-model-error"
-                                          (merge (common-context) context))]
-    (when (seq emails)
-      (email/send-message!
-        {:subject      (trs "[{0}] Model cache refresh failed for {1}" (app-name-trs) (:name database))
-         :recipients   (vec emails)
-         :message-type :html
-         :message      message-body}))))
+(defn send-persistent-model-error-email! "disabled" [])
+;; (defn send-persistent-model-error-email!
+;;   "Format and send an email informing the user about errors in the persistent model refresh task."
+;;   [database-id persisted-infos trigger]
+;;   {:pre [(seq persisted-infos)]}
+;;   (let [database (:database (first persisted-infos))
+;;         emails (admin-or-ee-monitoring-details-emails database-id)
+;;         timezone (some-> database qp.timezone/results-timezone-id t/zone-id)
+;;         context {:database-name (:name database)
+;;                  :errors
+;;                  (for [[idx persisted-info] (m/indexed persisted-infos)
+;;                        :let [card (:card persisted-info)
+;;                              collection (or (:collection card)
+;;                                             (collection/root-collection-with-ui-details nil))]]
+;;                    {:is-not-first (not= 0 idx)
+;;                     :error (:error persisted-info)
+;;                     :card-id (:id card)
+;;                     :card-name (:name card)
+;;                     :collection-name (:name collection)
+;;                     ;; February 1, 2022, 3:10 PM
+;;                     :last-run-at (t/format "MMMM d, yyyy, h:mm a z" (t/zoned-date-time (:refresh_begin persisted-info) timezone))
+;;                     :last-run-trigger trigger
+;;                     :card-url (urls/card-url (:id card))
+;;                     :collection-url (urls/collection-url (:id collection))
+;;                     :caching-log-details-url (urls/tools-caching-details-url (:id persisted-info))})}
+;;         message-body (stencil/render-file "metabase/email/persisted-model-error"
+;;                                           (merge (common-context) context))]
+;;     (when (seq emails)
+;;       (email/send-message!
+;;         {:subject      (trs "[{0}] Model cache refresh failed for {1}" (app-name-trs) (:name database))
+;;          :recipients   (vec emails)
+;;          :message-type :html
+;;          :message      message-body}))))
 
-(defn send-follow-up-email!
-  "Format and send an email to the system admin following up on the installation."
-  [email]
-  {:pre [(u/email? email)]}
-  (let [context (merge (common-context)
-                       {:emailType    "notification"
-                        :logoHeader   true
-                        :heading      (trs "We hope you''ve been enjoying Metabase.")
-                        :callToAction (trs "Would you mind taking a quick 5 minute survey to tell us how it’s going?")
-                        :link         "https://metabase.com/feedback/active"})
-        email {:subject      (trs "[{0}] Tell us how things are going." (app-name-trs))
-               :recipients   [email]
-               :message-type :html
-               :message      (stencil/render-file "metabase/email/follow_up_email" context)}]
-    (email/send-message! email)))
+(defn send-follow-up-email! "disabled" [] )
+;; (defn send-follow-up-email!
+;;   "Format and send an email to the system admin following up on the installation."
+;;   [email]
+;;   {:pre [(u/email? email)]}
+;;   (let [context (merge (common-context)
+;;                        {:emailType    "notification"
+;;                         :logoHeader   true
+;;                         :heading      (trs "We hope you''ve been enjoying Metabase.")
+;;                         :callToAction (trs "Would you mind taking a quick 5 minute survey to tell us how it’s going?")
+;;                         :link         "https://metabase.com/feedback/active"})
+;;         email {:subject      (trs "[{0}] Tell us how things are going." (app-name-trs))
+;;                :recipients   [email]
+;;                :message-type :html
+;;                :message      (stencil/render-file "metabase/email/follow_up_email" context)}]
+;;     (email/send-message! email)))
 
-(defn send-creator-sentiment-email!
-  "Format and send an email to a creator with a link to a survey. If a [[blob]] is included, it will be turned into json
-  and then base64 encoded."
-  [{:keys [email first_name]} blob]
-  {:pre [(u/email? email)]}
-  (let [encoded-info    (when blob
-                          (-> blob
-                              json/generate-string
-                              .getBytes
-                              codecs/bytes->b64-str))
-        context (merge (common-context)
-                       {:emailType  "notification"
-                        :logoHeader true
-                        :first-name first_name
-                        :link       (cond-> "https://metabase.com/feedback/creator"
-                                      encoded-info (str "?context=" encoded-info))}
-                       (when-not (premium-features/is-hosted?)
-                         {:self-hosted (public-settings/site-url)}))
-        message {:subject      "Metabase would love your take on something"
-                 :recipients   [email]
-                 :message-type :html
-                 :message      (stencil/render-file "metabase/email/creator_sentiment_email" context)}]
-    (email/send-message! message)))
+(defn send-creator-sentiment-email! "disabled" [])
+;; (defn send-creator-sentiment-email!
+;;   "Format and send an email to a creator with a link to a survey. If a [[blob]] is included, it will be turned into json
+;;   and then base64 encoded."
+;;   [{:keys [email first_name]} blob]
+;;   {:pre [(u/email? email)]}
+;;   (let [encoded-info    (when blob
+;;                           (-> blob
+;;                               json/generate-string
+;;                               .getBytes
+;;                               codecs/bytes->b64-str))
+;;         context (merge (common-context)
+;;                        {:emailType  "notification"
+;;                         :logoHeader true
+;;                         :first-name first_name
+;;                         :link       (cond-> "https://metabase.com/feedback/creator"
+;;                                       encoded-info (str "?context=" encoded-info))}
+;;                        (when-not (premium-features/is-hosted?)
+;;                          {:self-hosted (public-settings/site-url)}))
+;;         message {:subject      "Metabase would love your take on something"
+;;                  :recipients   [email]
+;;                  :message-type :html
+;;                  :message      (stencil/render-file "metabase/email/creator_sentiment_email" context)}]
+;;     (email/send-message! message)))
 
 (defn- make-message-attachment [[content-id url]]
   {:type         :inline
@@ -657,89 +662,98 @@
 (def ^:private stopped-template            (template-path "alert_stopped_working"))
 (def ^:private archived-template           (template-path "alert_archived"))
 
-(defn send-new-alert-email!
-  "Send out the initial 'new alert' email to the `creator` of the alert"
-  [{:keys [creator] :as alert}]
-  (send-email! creator "You set up an alert" new-alert-template
-               (common-alert-context alert alert-condition-text)))
+(defn send-new-alert-email! "disabled" [])
+;; (defn send-new-alert-email!
+;;   "Send out the initial 'new alert' email to the `creator` of the alert"
+;;   [{:keys [creator] :as alert}]
+;;   (send-email! creator "You set up an alert" new-alert-template
+;;                (common-alert-context alert alert-condition-text)))
 
-(defn send-you-unsubscribed-alert-email!
-  "Send an email to `who-unsubscribed` letting them know they've unsubscribed themselves from `alert`"
-  [alert who-unsubscribed]
-  (send-email! who-unsubscribed "You unsubscribed from an alert" you-unsubscribed-template
-               (common-alert-context alert)))
+(defn send-you-unsubscribed-alert-email! "disabled" [])
+;; (defn send-you-unsubscribed-alert-email!
+;;   "Send an email to `who-unsubscribed` letting them know they've unsubscribed themselves from `alert`"
+;;   [alert who-unsubscribed]
+;;   (send-email! who-unsubscribed "You unsubscribed from an alert" you-unsubscribed-template
+;;                (common-alert-context alert)))
 
-(defn send-admin-unsubscribed-alert-email!
-  "Send an email to `user-added` letting them know `admin` has unsubscribed them from `alert`"
-  [alert user-added {:keys [first_name last_name] :as _admin}]
-  (let [admin-name (format "%s %s" first_name last_name)]
-    (send-email! user-added "You’ve been unsubscribed from an alert" admin-unsubscribed-template
-                 (assoc (common-alert-context alert) :adminName admin-name))))
+(defn send-admin-unsubscribed-alert-email! "disabled" [])
+;; (defn send-admin-unsubscribed-alert-email!
+;;   "Send an email to `user-added` letting them know `admin` has unsubscribed them from `alert`"
+;;   [alert user-added {:keys [first_name last_name] :as _admin}]
+;;   (let [admin-name (format "%s %s" first_name last_name)]
+;;     (send-email! user-added "You’ve been unsubscribed from an alert" admin-unsubscribed-template
+;;                  (assoc (common-alert-context alert) :adminName admin-name))))
 
-(defn send-you-were-added-alert-email!
-  "Send an email to `user-added` letting them know `admin-adder` has added them to `alert`"
-  [alert user-added {:keys [first_name last_name] :as _admin-adder}]
-  (let [subject (format "%s %s added you to an alert" first_name last_name)]
-    (send-email! user-added subject added-template (common-alert-context alert alert-condition-text))))
+(defn send-you-were-added-alert-email! "disabled" [])
+;; (defn send-you-were-added-alert-email!
+;;   "Send an email to `user-added` letting them know `admin-adder` has added them to `alert`"
+;;   [alert user-added {:keys [first_name last_name] :as _admin-adder}]
+;;   (let [subject (format "%s %s added you to an alert" first_name last_name)]
+;;     (send-email! user-added subject added-template (common-alert-context alert alert-condition-text))))
 
 (def ^:private not-working-subject "One of your alerts has stopped working")
 
-(defn send-alert-stopped-because-archived-email!
-  "Email to notify users when a card associated to their alert has been archived"
-  [alert user {:keys [first_name last_name] :as _archiver}]
-  (let [{card-id :id card-name :name} (first-card alert)]
-    (send-email! user not-working-subject archived-template {:archiveURL   (urls/archive-url)
-                                                             :questionName (format "%s (#%d)" card-name card-id)
-                                                             :archiverName (format "%s %s" first_name last_name)})))
-(defn send-alert-stopped-because-changed-email!
-  "Email to notify users when a card associated to their alert changed in a way that invalidates their alert"
-  [alert user {:keys [first_name last_name] :as _archiver}]
-  (let [edited-text (format "the question was edited by %s %s" first_name last_name)]
-    (send-email! user not-working-subject stopped-template (assoc (common-alert-context alert) :deletionCause edited-text))))
+(defn send-alert-stopped-because-archived-email! "disabled" [])
+;; (defn send-alert-stopped-because-archived-email!
+;;   "Email to notify users when a card associated to their alert has been archived"
+;;   [alert user {:keys [first_name last_name] :as _archiver}]
+;;   (let [{card-id :id card-name :name} (first-card alert)]
+;;     (send-email! user not-working-subject archived-template {:archiveURL   (urls/archive-url)
+;;                                                              :questionName (format "%s (#%d)" card-name card-id)
+;;                                                              :archiverName (format "%s %s" first_name last_name)})))
 
-(defn send-slack-token-error-emails!
-  "Email all admins when a Slack API call fails due to a revoked token or other auth error"
-  []
-  (email/send-message!
-   :subject (trs "Your Slack connection stopped working")
-   :recipients (all-admin-recipients)
-   :message-type :html
-   :message (stencil/render-file "metabase/email/slack_token_error.mustache"
-                                 (merge (common-context)
-                                        {:logoHeader  true
-                                         :settingsUrl (str (public-settings/site-url) "/admin/settings/slack")}))))
+(defn send-alert-stopped-because-changed-email! "disabled" [])
+;; (defn send-alert-stopped-because-changed-email!
+;;   "Email to notify users when a card associated to their alert changed in a way that invalidates their alert"
+;;   [alert user {:keys [first_name last_name] :as _archiver}]
+;;   (let [edited-text (format "the question was edited by %s %s" first_name last_name)]
+;;     (send-email! user not-working-subject stopped-template (assoc (common-alert-context alert) :deletionCause edited-text))))
 
-(defn send-broken-subscription-notification!
-  "Email dashboard and subscription creators information about a broken subscription due to bad parameters"
-  [{:keys [dashboard-id dashboard-name pulse-creator dashboard-creator affected-users bad-parameters]}]
-  (let [{:keys [siteUrl] :as context} (common-context)]
-    (email/send-message!
-      :subject (trs "Subscription to {0} removed" dashboard-name)
-      :recipients (distinct (map :email [pulse-creator dashboard-creator]))
-      :message-type :html
-      :message (stencil/render-file
-                 "metabase/email/broken_subscription_notification.mustache"
-                 (merge context
-                        {:dashboardName            dashboard-name
-                         :badParameters            (map
-                                                     (fn [{:keys [value] :as param}]
-                                                       (cond-> param
-                                                         (coll? value)
-                                                         (update :value #(lib.util/join-strings-with-conjunction
-                                                                           (i18n/tru "or")
-                                                                           %))))
-                                                     bad-parameters)
-                         :affectedUsers            (map
-                                                     (fn [{:keys [notification-type] :as m}]
-                                                       (cond-> m
-                                                         notification-type
-                                                         (update :notification-type name)))
-                                                     (into
-                                                       [{:notification-type :email
-                                                         :recipient         (:common_name dashboard-creator)
-                                                         :role              "Dashboard Creator"}
-                                                        {:notification-type :email
-                                                         :recipient         (:common_name pulse-creator)
-                                                         :role              "Subscription Creator"}]
-                                                       (map #(assoc % :role "Subscriber") affected-users)))
-                         :dashboardUrl             (format "%s/dashboard/%s" siteUrl dashboard-id)})))))
+(defn send-slack-token-error-emails! "disabled" [])
+;; (defn send-slack-token-error-emails!
+;;   "Email all admins when a Slack API call fails due to a revoked token or other auth error"
+;;   []
+;;   (email/send-message!
+;;    :subject (trs "Your Slack connection stopped working")
+;;    :recipients (all-admin-recipients)
+;;    :message-type :html
+;;    :message (stencil/render-file "metabase/email/slack_token_error.mustache"
+;;                                  (merge (common-context)
+;;                                         {:logoHeader  true
+;;                                          :settingsUrl (str (public-settings/site-url) "/admin/settings/slack")}))))
+
+(defn send-broken-subscription-notification! "disabled" [])
+;; (defn send-broken-subscription-notification!
+;;   "Email dashboard and subscription creators information about a broken subscription due to bad parameters"
+;;   [{:keys [dashboard-id dashboard-name pulse-creator dashboard-creator affected-users bad-parameters]}]
+;;   (let [{:keys [siteUrl] :as context} (common-context)]
+;;     (email/send-message!
+;;       :subject (trs "Subscription to {0} removed" dashboard-name)
+;;       :recipients (distinct (map :email [pulse-creator dashboard-creator]))
+;;       :message-type :html
+;;       :message (stencil/render-file
+;;                  "metabase/email/broken_subscription_notification.mustache"
+;;                  (merge context
+;;                         {:dashboardName            dashboard-name
+;;                          :badParameters            (map
+;;                                                      (fn [{:keys [value] :as param}]
+;;                                                        (cond-> param
+;;                                                          (coll? value)
+;;                                                          (update :value #(lib.util/join-strings-with-conjunction
+;;                                                                            (i18n/tru "or")
+;;                                                                            %))))
+;;                                                      bad-parameters)
+;;                          :affectedUsers            (map
+;;                                                      (fn [{:keys [notification-type] :as m}]
+;;                                                        (cond-> m
+;;                                                          notification-type
+;;                                                          (update :notification-type name)))
+;;                                                      (into
+;;                                                        [{:notification-type :email
+;;                                                          :recipient         (:common_name dashboard-creator)
+;;                                                          :role              "Dashboard Creator"}
+;;                                                         {:notification-type :email
+;;                                                          :recipient         (:common_name pulse-creator)
+;;                                                          :role              "Subscription Creator"}]
+;;                                                        (map #(assoc % :role "Subscriber") affected-users)))
+;;                          :dashboardUrl             (format "%s/dashboard/%s" siteUrl dashboard-id)})))))

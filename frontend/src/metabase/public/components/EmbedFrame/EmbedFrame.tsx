@@ -46,7 +46,6 @@ import {
   Separator,
   TitleAndDescriptionContainer,
 } from "./EmbedFrame.styled";
-import { LogoBadge } from "./LogoBadge";
 
 export type EmbedFrameBaseProps = Partial<{
   className: string;
@@ -238,9 +237,9 @@ export const EmbedFrame = ({
           className={EmbedFrameS.EmbedFrameFooter}
           variant={footerVariant}
         >
-          {hasEmbedBranding && (
+          {/* {hasEmbedBranding && (
             <LogoBadge variant={footerVariant} dark={theme === "night"} />
-          )}
+          )} */}
           {actionButtons && (
             <ActionButtonsContainer>{actionButtons}</ActionButtonsContainer>
           )}

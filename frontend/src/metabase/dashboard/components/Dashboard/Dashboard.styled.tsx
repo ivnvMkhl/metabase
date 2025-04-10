@@ -90,6 +90,7 @@ export const DashboardHeaderContainer = styled.header<{
 
 export const CardsContainer = styled(FullWidthContainer)`
   margin-top: 8px;
+  background: ${color("content")};
 `;
 
 function getParametersWidgetBgColor(isNightMode: boolean) {
@@ -133,6 +134,7 @@ export const ParametersWidgetContainer = styled(FullWidthContainer)<{
 
 export const ParametersAndCardsContainer = styled.div<{
   shouldMakeDashboardHeaderStickyAfterScrolling: boolean;
+  isShowSkLogo: boolean;
 }>`
   flex: auto;
   min-width: 0;
@@ -144,7 +146,7 @@ export const ParametersAndCardsContainer = styled.div<{
     overflow-x: clip;
   }
 
-  padding-bottom: 40px;
+  padding-bottom: ${({ isShowSkLogo }) => (isShowSkLogo ? `120px` : `40px`)};
   /* Makes sure it doesn't use all the height, so the actual content height could be used in embedding #37437 */
   align-self: ${({ shouldMakeDashboardHeaderStickyAfterScrolling }) =>
     !shouldMakeDashboardHeaderStickyAfterScrolling && "flex-start"};

@@ -24,10 +24,20 @@ export const AppContentContainer = styled.div<{
   }
 `;
 
-export const AppContent = styled.main`
+export const AppContent = styled.main<{ showLogo: boolean }>`
   width: 100%;
   height: 100%;
   overflow: auto;
+
+  ${({ showLogo }) =>
+    showLogo
+      ? `
+  padding-bottom: 120px;
+  background-image: url("app/img/sk_resident.svg");
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position: bottom 30px right 30px;`
+      : ``}
 
   @media print {
     overflow: visible !important;

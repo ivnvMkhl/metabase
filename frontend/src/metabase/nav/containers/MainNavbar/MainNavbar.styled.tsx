@@ -76,6 +76,14 @@ export const SidebarContentRoot = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url("app/img/sk_resident.svg");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: bottom 54px left 54px;
+
+  > div {
+    background: var(--mb-color-bg-white);
+  }
 `;
 
 export const SidebarSection = styled(Box)<BoxProps>`

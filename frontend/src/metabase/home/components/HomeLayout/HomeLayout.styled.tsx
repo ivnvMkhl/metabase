@@ -8,11 +8,20 @@ import {
   breakpointMinMedium,
 } from "metabase/styled-components/theme";
 
-export const LayoutRoot = styled.div`
+export const LayoutRoot = styled.div<{ showLogo: boolean }>`
   position: relative;
   min-height: 100%;
   padding: 1rem;
   background-color: var(--mb-color-bg-white);
+
+  ${({ showLogo }) =>
+    showLogo
+      ? `
+  background-image: url("app/img/sk_resident.svg");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: bottom 54px left 54px;`
+      : ``}
 
   ${breakpointMinMedium} {
     padding: 3rem 4rem;
@@ -55,7 +64,7 @@ export const LayoutIllustration = styled.div<{
     `url("${backgroundImageSrc}")`};
   background-size: 25vw;
   background-repeat: no-repeat;
-  background-position: bottom 24px right 24px;
+  background-position: bottom 54px right 54px;
 `;
 
 export const LayoutEditButton = styled(Button)`

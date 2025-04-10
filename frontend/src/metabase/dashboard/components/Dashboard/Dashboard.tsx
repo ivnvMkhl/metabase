@@ -23,7 +23,8 @@ import type {
 import Bookmarks from "metabase/entities/bookmarks";
 import Dashboards from "metabase/entities/dashboards";
 import { getMainElement } from "metabase/lib/dom";
-import { useDispatch } from "metabase/lib/redux";
+import { useDispatch, useSelector } from "metabase/lib/redux";
+import { getIsNavbarOpen } from "metabase/selectors/app";
 import type {
   CardId,
   Dashboard as IDashboard,
@@ -202,6 +203,8 @@ function Dashboard(props: DashboardProps) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [hasScroll, setHasScroll] = useState(getMainElement()?.scrollTop > 0);
+
+  const isNavBarOpen = useSelector(getIsNavbarOpen);
 
   const previousDashboard = usePrevious(dashboard);
   const previousDashboardId = usePrevious(dashboardId);
@@ -465,6 +468,7 @@ function Dashboard(props: DashboardProps) {
                 id={DASHBOARD_PDF_EXPORT_ROOT_ID}
                 data-element-id="dashboard-parameters-and-cards"
                 data-testid="dashboard-parameters-and-cards"
+                isShowSkLogo={!isNavBarOpen}
                 shouldMakeDashboardHeaderStickyAfterScrolling={
                   !isFullscreen && (isEditing || isSharing)
                 }

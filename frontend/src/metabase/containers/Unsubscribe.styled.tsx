@@ -36,7 +36,7 @@ export const LayoutIllustration = styled.div<{
     `url("${backgroundImageSrc}")`};
   background-size: 25vw;
   background-repeat: no-repeat;
-  background-position: bottom 24px right 24px;
+  background-position: bottom 54px right 54px;
 `;
 
 export const LayoutCard = styled.div`

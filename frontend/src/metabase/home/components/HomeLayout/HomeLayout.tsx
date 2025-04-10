@@ -5,6 +5,7 @@ import { t } from "ttag";
 import Tooltip from "metabase/core/components/Tooltip/Tooltip";
 import { useSelector } from "metabase/lib/redux";
 import MetabotWidget from "metabase/metabot/components/MetabotWidget";
+import { getIsNavbarOpen } from "metabase/selectors/app";
 import { getUserIsAdmin } from "metabase/selectors/user";
 import { getLandingPageIllustration } from "metabase/selectors/whitelabel";
 
@@ -29,10 +30,11 @@ export const HomeLayout = ({
 }: HomeLayoutProps): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const isAdmin = useSelector(getUserIsAdmin);
+  const isNavBarOpen = useSelector(getIsNavbarOpen);
   const landingPageIllustration = useSelector(getLandingPageIllustration);
 
   return (
-    <LayoutRoot data-testid="home-page">
+    <LayoutRoot data-testid="home-page" showLogo={!isNavBarOpen}>
       {landingPageIllustration && (
         <LayoutIllustration
           data-testid="landing-page-illustration"

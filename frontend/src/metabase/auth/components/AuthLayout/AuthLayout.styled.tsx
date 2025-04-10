@@ -7,6 +7,10 @@ export const LayoutRoot = styled.div`
   position: relative;
   min-height: 100vh;
   background-color: var(--mb-color-bg-light);
+  background-image: url("app/img/sk_resident.svg");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: bottom 54px left 54px;
 `;
 
 export const LayoutBody = styled.div`
@@ -48,5 +52,5 @@ export const LayoutIllustration = styled.div<{
     `url("${backgroundImageSrc}")`};
   background-size: 25vw;
   background-repeat: no-repeat;
-  background-position: bottom 24px right 24px;
+  background-position: bottom 54px right 54px;
 `;

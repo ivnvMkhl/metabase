@@ -25,12 +25,14 @@ import {
   getIsAdminApp,
   getIsAppBarVisible,
   getIsNavBarEnabled,
+  getIsNavbarOpen,
 } from "metabase/selectors/app";
 import StatusListing from "metabase/status/components/StatusListing";
 import type { AppErrorDescriptor, State } from "metabase-types/store";
 
 import { AppContainer, AppContent, AppContentContainer } from "./App.styled";
 import ErrorBoundary from "./ErrorBoundary";
+import { useSelector } from "./lib/redux";
 import { NewModals } from "./new/components/NewModals/NewModals";
 import { Palette } from "./palette/components/Palette";
 
@@ -92,6 +94,7 @@ function App({
   onError,
 }: AppProps) {
   const [viewportElement, setViewportElement] = useState<HTMLElement | null>();
+  const isNavBarOpen = useSelector(getIsNavbarOpen);
 
   useEffect(() => {
     initializeIframeResizer();
@@ -107,7 +110,7 @@ function App({
             {isAppBarVisible && <AppBar />}
             <AppContentContainer isAdminApp={isAdminApp}>
               {isNavBarEnabled && <Navbar />}
-              <AppContent ref={setViewportElement}>
+              <AppContent ref={setViewportElement} showLogo={!isNavBarOpen}>
                 <ContentViewportContext.Provider
                   value={viewportElement ?? null}
                 >

@@ -92,6 +92,7 @@ function App({
   isNavBarEnabled,
   children,
   onError,
+  location,
 }: AppProps) {
   const [viewportElement, setViewportElement] = useState<HTMLElement | null>();
   const isNavBarOpen = useSelector(getIsNavbarOpen);
@@ -110,7 +111,10 @@ function App({
             {isAppBarVisible && <AppBar />}
             <AppContentContainer isAdminApp={isAdminApp}>
               {isNavBarEnabled && <Navbar />}
-              <AppContent ref={setViewportElement} showLogo={!isNavBarOpen}>
+              <AppContent
+                ref={setViewportElement}
+                showLogo={!isNavBarOpen && location.pathname !== "/"}
+              >
                 <ContentViewportContext.Provider
                   value={viewportElement ?? null}
                 >

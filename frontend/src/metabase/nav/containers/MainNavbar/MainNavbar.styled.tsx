@@ -71,15 +71,18 @@ export const NavRoot = styled.nav<{ isOpen: boolean }>`
   }
 `;
 
-export const SidebarContentRoot = styled.div`
+export const SidebarContentRoot = styled.div<{ isLogoShow: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url("app/img/sk_resident.svg");
+  ${props =>
+    props.isLogoShow
+      ? `background-image: url("app/img/sk_resident.svg");
   background-size: 100px;
   background-repeat: no-repeat;
-  background-position: bottom 54px left 54px;
+  background-position: bottom 54px left 54px;`
+      : ""}
 
   > div {
     background: var(--mb-color-bg-white);

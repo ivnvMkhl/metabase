@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { t } from "ttag";
 import _ from "underscore";
 
@@ -80,6 +80,29 @@ function MainNavbarView({
   const [expandBookmarks = true, setExpandBookmarks] = useUserSetting(
     "expand-bookmarks-in-nav",
   );
+  const sidebarRoot = useRef<HTMLDivElement>(null);
+  const menuWrapper = useRef<HTMLDivElement>(null);
+  const [isLogoShow, setIsLogoShow] = useState(true);
+
+  useEffect(() => {
+    const rootNode = sidebarRoot.current;
+    const menuNode = menuWrapper.current;
+    if (rootNode && menuNode) {
+      const handleResize = () => {
+        const isLogoShow = rootNode.clientHeight - menuNode.clientHeight > 160;
+        setIsLogoShow(isLogoShow);
+      };
+
+      const observer = new ResizeObserver(handleResize);
+
+      observer.observe(rootNode);
+      observer.observe(menuNode);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
 
   const { canNavigateHome } = useHomepageDashboard();
 
@@ -121,8 +144,8 @@ function MainNavbarView({
   );
 
   return (
-    <SidebarContentRoot>
-      <div>
+    <SidebarContentRoot ref={sidebarRoot} isLogoShow={isLogoShow}>
+      <div ref={menuWrapper}>
         <SidebarSection>
           <PaddedSidebarLink
             isSelected={nonEntityItem?.url === "/"}

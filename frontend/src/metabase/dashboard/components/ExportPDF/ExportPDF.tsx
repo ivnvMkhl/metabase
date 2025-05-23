@@ -262,6 +262,7 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
         queryParams: {},
         options: {
           clearCache: false,
+          preserveParameters: true,
         },
       });
 

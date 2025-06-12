@@ -1,16 +1,20 @@
 import cx from "classnames";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { t } from "ttag";
 import _ from "underscore";
 
+import { useGetFavoriteListQuery } from "metabase/api/favorite";
 import FieldValuesWidget from "metabase/components/FieldValuesWidget";
+import Button from "metabase/core/components/Button";
 import CS from "metabase/css/core/index.css";
+import { favoriteFilters } from "metabase/dashboard/favoriteFIlters";
 import { UpdateFilterButton } from "metabase/parameters/components/UpdateFilterButton";
 import {
   WidgetRoot,
   Footer,
 } from "metabase/parameters/components/widgets/Widget.styled";
+import { Menu } from "metabase/ui/components/overlays/Menu";
 import {
   getFilterArgumentFormatOptions,
   isEqualsOperator,
@@ -44,6 +48,8 @@ export default function ParameterFieldWidget({
   dashboard,
 }) {
   const [unsavedValue, setUnsavedValue] = useState(() => normalizeValue(value));
+  const { data: favoriteGroups, isFetching, error } = useGetFavoriteListQuery();
+
   const operator = deriveFieldOperatorFromParameter(parameter);
   const { numFields = 1, multi = false, verboseName } = operator || {};
   const isEqualsOp = isEqualsOperator(operator);
@@ -54,6 +60,42 @@ export default function ParameterFieldWidget({
   const isValid =
     unsavedValue.every(value => value != null) &&
     (supportsMultipleValues || unsavedValue.length === numFields);
+
+  const handleSetFavoriteValues = favoriteGroup => () => {
+    const values = JSON.parse(favoriteGroup.group_values) ?? [];
+    const usedParameterFields = parameter.fields.map(field => field.id);
+    const possibleValues = Object.values(dashboard.param_values).reduce(
+      (acc, param_values) => {
+        if (usedParameterFields.includes(param_values.field_id)) {
+          return acc.concat(param_values.values);
+        }
+        return acc;
+      },
+      [],
+    );
+
+    const realValues = values.filter(value => possibleValues.includes(value));
+    favoriteFilters.set(parameter.id, favoriteGroup.id);
+    setUnsavedValue(realValues);
+  };
+
+  const availableFavoriteGroups = useMemo(() => {
+    const usedParameterFields = parameter.fields.map(field => field.id);
+    const possibleValues = Object.values(dashboard.param_values).reduce(
+      (acc, param_values) => {
+        if (usedParameterFields.includes(param_values.field_id)) {
+          return acc.concat(param_values.values);
+        }
+        return acc;
+      },
+      [],
+    );
+    return favoriteGroups.filter(favoriteGroup => {
+      const values = JSON.parse(favoriteGroup.group_values) ?? [];
+      const realValues = values.filter(value => possibleValues.includes(value));
+      return Boolean(realValues.length);
+    });
+  }, [favoriteGroups, dashboard.param_values, parameter.fields]);
 
   return (
     <WidgetRoot>
@@ -67,15 +109,19 @@ export default function ParameterFieldWidget({
             ? unsavedValue
             : [unsavedValue[index]];
           const onValueChange = supportsMultipleValues
-            ? newValues => setUnsavedValue(newValues)
+            ? newValues => {
+                favoriteFilters.delete(parameter.id);
+                setUnsavedValue(newValues);
+              }
             : ([value]) => {
                 const newValues = [...unsavedValue];
                 newValues[index] = value;
+                favoriteFilters.delete(parameter.id);
                 setUnsavedValue(newValues);
               };
           return (
             <FieldValuesWidget
-              key={index}
+              key={index + String(value)}
               className={cx(CS.input, numFields - 1 !== index && CS.mb1)}
               value={value}
               parameter={parameter}
@@ -98,6 +144,37 @@ export default function ParameterFieldWidget({
         })}
       </div>
       <Footer>
+        {Boolean(availableFavoriteGroups.length) && (
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <Button disabled={isFetching || error}>
+                Добавить из избранного
+              </Button>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              {availableFavoriteGroups?.map(favoriteGroup => (
+                <Menu.Item
+                  Key={favoriteGroup.id}
+                  onClick={handleSetFavoriteValues(favoriteGroup)}
+                  icon={
+                    <div
+                      style={{
+                        width: "12px",
+                        height: "12px",
+                        borderRadius: "4px",
+                        background: favoriteGroup.color,
+                      }}
+                    />
+                  }
+                >
+                  {favoriteGroup.name}
+                </Menu.Item>
+              ))}
+            </Menu.Dropdown>
+          </Menu>
+        )}
+
         <UpdateFilterButton
           value={value}
           unsavedValue={unsavedValue}

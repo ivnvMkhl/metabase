@@ -8349,6 +8349,55 @@ databaseChangeLog:
             columnName: explicit_reference
             defaultValueBoolean: true
 
+  - changeSet:
+      id: "v59.2025-05-24T20:00:00"
+      author: iMkhl
+      comment: Add favorite_group table
+      changes:
+        - sql:
+            sql: >-
+              CREATE TABLE favorite_group (
+                id           SERIAL PRIMARY KEY,
+                name         VARCHAR(255) NOT NULL,
+                color        VARCHAR(255) NOT NULL,
+                code         VARCHAR(255) NOT NULL,
+                description  TEXT,
+                group_values TEXT NOT NULL,
+                created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                is_active    BOOLEAN DEFAULT TRUE,
+                user_id      int4 NOT NULL,
+                CONSTRAINT fk_favorite_group_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE
+              );
+              CREATE INDEX idx_favorite_group_user_id ON favorite_group(user_id);
+      rollback:
+        - sql:
+            sql: DROP TABLE IF EXISTS favorite_group;
+
+  - changeSet:
+      id: "v61.2025-05-25T16:00:00"
+      author: iMkhl
+      comment: Add default "Интересно" group for all existing users
+      changes:
+        - sql:
+            sql: >-
+              INSERT INTO favorite_group (name, color, code, description, group_values, user_id, is_active)
+              SELECT
+                'Интересно',
+                '#e20613',
+                'ЖК рус',
+                'Группа избранного по-умолчанию',
+                '[]',
+                id,
+                true
+              FROM core_user cu
+              WHERE NOT EXISTS (
+                SELECT 1 FROM favorite_group fg
+                WHERE fg.user_id = cu.id AND fg.name = 'Интересно')
+      rollback:
+        - sql:
+            sql: DELETE FROM favorite_group WHERE name = 'Интересно';
+
   # >>>>>>>>>> DO NOT ADD NEW MIGRATIONS BELOW THIS LINE! ADD THEM ABOVE <<<<<<<<<<
 
 ########################################################################################################################

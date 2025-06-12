@@ -5,6 +5,7 @@ import type { Route } from "react-router";
 import { usePrevious, useUnmount } from "react-use";
 import _ from "underscore";
 
+import { useGetFavoriteListQuery } from "metabase/api/favorite";
 import { deletePermanently } from "metabase/archive/actions";
 import { ArchivedEntityBanner } from "metabase/archive/components/ArchivedEntityBanner";
 import {
@@ -13,8 +14,10 @@ import {
   type NewDashCardOpts,
   setArchivedDashboard,
   type SetDashboardAttributesOpts,
+  setParameterValues,
 } from "metabase/dashboard/actions";
 import { DashboardHeader } from "metabase/dashboard/components/DashboardHeader";
+import { favoriteFilters } from "metabase/dashboard/favoriteFIlters";
 import type {
   DashboardDisplayOptionControls,
   FetchDashboardResult,
@@ -199,6 +202,7 @@ function Dashboard(props: DashboardProps) {
     location,
   } = props;
   const dispatch = useDispatch();
+  const { data: favoriteGroups } = useGetFavoriteListQuery();
 
   const [isInitialized, setIsInitialized] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -210,6 +214,28 @@ function Dashboard(props: DashboardProps) {
   const previousDashboardId = usePrevious(dashboardId);
   const previousTabId = usePrevious(selectedTabId);
   const previousParameterValues = usePrevious(parameterValues);
+
+  useEffect(() => {
+    if (dashboard && favoriteGroups) {
+      const values = dashboard.parameters?.reduce((acc, parameter) => {
+        if (favoriteFilters.has(parameter.id)) {
+          const favoriteGroupId = favoriteFilters.get(parameter.id);
+          const values = JSON.parse(
+            favoriteGroups.find(group => group.id === Number(favoriteGroupId))
+              ?.group_values ?? "[]",
+          );
+
+          return { ...acc, [parameter.id]: values };
+        }
+        return {
+          ...acc,
+          [parameter.id]: parameterValues?.[parameter.id] ?? null,
+        };
+      }, {});
+      dispatch(setParameterValues(values));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dashboard, favoriteGroups]);
 
   const currentTabDashcards = useMemo(() => {
     if (!dashboard || !Array.isArray(dashboard.dashcards)) {

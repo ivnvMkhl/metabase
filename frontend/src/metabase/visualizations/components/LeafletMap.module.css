@@ -23,8 +23,15 @@
   border-radius: 0;
   background: hsla(0deg, 0%, 100%, 0.9);
   display: flex;
+  gap: 6px;
   align-items: center;
   color: #333;
+}
+
+:global(.custom-map-marker-favorite-label) {
+  height: 12px;
+  width: 12px;
+  border-radius: 4px;
 }
 
 :global(.custom-map-marker-wrapper:hover) {
@@ -34,4 +41,53 @@
 :global(.custom-map-marker-icon) {
   min-width: 32px;
   min-height: 32px;
+}
+
+.mapWrapper {
+  position: relative;
+}
+
+.favoriteMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px;
+}
+
+.favoriteMenuItem {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.favoriteMenuItem:hover {
+  background-color: var(--mb-color-brand-lighter);
+  cursor: pointer;
+}
+
+.favoriteMenuItem:hover .favoriteMenuLabel {
+  color: var(--mb-color-brand);
+}
+
+.colorMarker {
+  width: 12px;
+  height: 12px;
+  max-height: 12px;
+  min-width: 12px;
+  border-radius: 4px;
+}
+
+.favoriteMenuLabel {
+  padding: 4px;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 12px;
 }

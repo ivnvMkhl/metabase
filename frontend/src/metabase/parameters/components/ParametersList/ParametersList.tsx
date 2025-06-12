@@ -2,6 +2,7 @@ import { useSensor, PointerSensor } from "@dnd-kit/core";
 import cx from "classnames";
 import { useCallback, useMemo } from "react";
 
+import { useGetFavoriteListQuery } from "metabase/api/favorite";
 import type {
   DragEndEvent,
   RenderItemProps,
@@ -39,6 +40,7 @@ export const ParametersList = ({
   setEditingParameter,
   enableParameterRequiredBehavior,
 }: ParametersListProps) => {
+  const { data: favoriteGroups } = useGetFavoriteListQuery();
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 15 },
   });
@@ -62,6 +64,7 @@ export const ParametersList = ({
     id,
   }: RenderItemProps<Parameter>) => (
     <ParameterWidget
+      favoriteGroups={favoriteGroups}
       key={`sortable-${id}`}
       className={cx({ [CS.mb2]: vertical })}
       isEditing={isEditing}

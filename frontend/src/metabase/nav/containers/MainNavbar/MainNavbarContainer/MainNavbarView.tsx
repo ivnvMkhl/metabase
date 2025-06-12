@@ -168,6 +168,14 @@ function MainNavbarView({
           />
           {hasDataAccess && (
             <>
+              <PaddedSidebarLink
+                isSelected={nonEntityItem?.url === "/browse/favorites"}
+                icon="star"
+                onClick={handleHomeClick}
+                url="/browse/favorites"
+              >
+                {`Избранное`}
+              </PaddedSidebarLink>
               {!hasOwnDatabase && isAdmin && (
                 <AddYourOwnDataLink
                   icon="add"

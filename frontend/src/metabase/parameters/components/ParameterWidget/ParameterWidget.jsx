@@ -45,12 +45,14 @@ export class ParameterWidget extends Component {
       enableParameterRequiredBehavior,
       isSortable,
       isEditing,
+      favoriteGroups,
     } = this.props;
 
     const isEditingParameter = editingParameter?.id === parameter.id;
 
     return (
       <ParameterValueWidget
+        favoriteGroups={favoriteGroups}
         parameter={parameter}
         parameters={parameters}
         question={question}
@@ -95,7 +97,6 @@ export class ParameterWidget extends Component {
       const fieldHasValueOrFocus =
         parameter.value != null || this.state.isFocused;
       const legend = fieldHasValueOrFocus ? parameter.name : "";
-
       return (
         <ParameterFieldSet
           legend={legend}

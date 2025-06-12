@@ -229,7 +229,9 @@ export const DashboardHeaderInner = ({
         isFullscreen,
       })
     ) {
-      buttons.push(<DashboardSubscriptionButton />);
+      buttons.push(
+        <DashboardSubscriptionButton key="subscription-dashboard" />,
+      );
     }
 
     buttons.push(
@@ -274,7 +276,12 @@ export const DashboardHeaderInner = ({
           pathname,
         });
         if (extraButtons.length > 0) {
-          buttons.push(<DashboardActionMenu items={extraButtons} />);
+          buttons.push(
+            <DashboardActionMenu
+              key="dashboard-action-menu"
+              items={extraButtons}
+            />,
+          );
         }
       }
     }

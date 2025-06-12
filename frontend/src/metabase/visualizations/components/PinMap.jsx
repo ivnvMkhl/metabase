@@ -14,7 +14,7 @@ import { hasLatitudeAndLongitudeColumns } from "metabase-lib/v1/types/utils/isa"
 
 import LeafletGridHeatMap from "./LeafletGridHeatMap";
 import LeafletHeatMap from "./LeafletHeatMap";
-import LeafletMarkerPinMap from "./LeafletMarkerPinMap";
+import { LeafletMarkerPinMap } from "./LeafletMarkerPinMapWrapper";
 import LeafletTilePinMap from "./LeafletTilePinMap";
 
 const WORLD_BOUNDS = [

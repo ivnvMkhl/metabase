@@ -18,6 +18,7 @@
    [metabase.api.dataset :as api.dataset]
    [metabase.api.email :as api.email]
    [metabase.api.embed :as api.embed]
+   [metabase.api.favorite-group :as api.favorite-group]
    [metabase.api.field :as api.field]
    [metabase.api.geojson :as api.geojson]
    [metabase.api.google :as api.google]
@@ -65,9 +66,9 @@
   ;; resolve the var for every request so we pick up any changes to it in interactive development
   (if-let [ee-handler-var (resolve 'metabase-enterprise.api.routes/routes)]
     (with-meta
-     (fn [request respond raise]
-       ((var-get ee-handler-var) request respond raise))
-     (meta ee-handler-var))
+      (fn [request respond raise]
+        ((var-get ee-handler-var) request respond raise))
+      (meta ee-handler-var))
     (fn [_request respond _raise]
       (respond nil))))
 
@@ -101,6 +102,7 @@
 (defroutes ^{:doc "Ring routes for API endpoints.", :arglists '([request] [request respond raise])} routes
   ee-routes
   #'GET_docs*
+  (context "/favorite"             [] (+auth api.favorite-group/routes))
   (context "/action"               [] (+auth api.action/routes))
   (context "/activity"             [] (+auth api.activity/routes))
   (context "/alert"                [] (+auth api.alert/routes))

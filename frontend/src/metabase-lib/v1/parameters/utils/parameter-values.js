@@ -45,14 +45,16 @@ export function getValuePopulatedParameters({
     return [];
   }
 
-  return parameters.map(parameter => ({
-    ...parameter,
-    value: getParameterValue({
-      parameter,
-      values,
-      defaultRequired,
-    }),
-  }));
+  return parameters.map(parameter => {
+    return {
+      ...parameter,
+      value: getParameterValue({
+        parameter,
+        values,
+        defaultRequired,
+      }),
+    };
+  });
 }
 
 export function getDefaultValuePopulatedParameters(

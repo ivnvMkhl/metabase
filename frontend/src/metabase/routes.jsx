@@ -55,6 +55,7 @@ import { BrowseDatabases } from "./browse/components/BrowseDatabases";
 import { BrowseModels } from "./browse/components/BrowseModels";
 import BrowseSchemas from "./browse/components/BrowseSchemas";
 import { BrowseTables } from "./browse/components/BrowseTables";
+import { FavoriteList } from "./browse/components/FavoriteList/FavoriteList";
 import { ExportPDF } from "./dashboard/components/ExportPDF/ExportPDF";
 import {
   CanAccessMetabot,
@@ -218,6 +219,11 @@ export const getRoutes = store => {
             <Route
               path="databases/:dbId/schema/:schemaName"
               component={BrowseTables}
+            />
+            <Route
+              path="favorites"
+              title={`Избранное`}
+              component={FavoriteList}
             />
 
             {/* These two Redirects support legacy paths in v48 and earlier */}

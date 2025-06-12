@@ -10,7 +10,10 @@ import { connect, type ConnectedProps } from "react-redux";
 import type { Route, WithRouterProps } from "react-router";
 import _ from "underscore";
 
+import { useGetFavoriteListQuery } from "metabase/api/favorite";
 import { Error } from "metabase/core/components/Alert/Alert.stories";
+import { setParameterValues } from "metabase/dashboard/actions";
+import { favoriteFilters } from "metabase/dashboard/favoriteFIlters";
 import {
   getClickBehaviorSidebarDashcard,
   getDashboardBeforeEditing,
@@ -40,6 +43,7 @@ import type {
 import title from "metabase/hoc/Title";
 import titleWithLoadingTime from "metabase/hoc/TitleWithLoadingTime";
 import { parseHashOptions } from "metabase/lib/browser";
+import { useDispatch } from "metabase/lib/redux";
 import * as Urls from "metabase/lib/urls";
 import { closeNavbar, setErrorPage } from "metabase/redux/app";
 import { getIsNavbarOpen } from "metabase/selectors/app";
@@ -220,11 +224,13 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
     fetchDashboardCardData,
     dashboard,
     selectedTabId,
+    parameterValues,
   } = props;
+  const dispatch = useDispatch();
   const options = parseHashOptions(window.location.hash);
   const addCardOnLoad = options.add != null ? Number(options.add) : undefined;
   const isNightMode = false;
-
+  const { data: favoriteGroups } = useGetFavoriteListQuery();
   const [exportFormat, setExportFormat] = useState<ExportFormat>("a4");
   const [exportOrientation, setExportOrientation] =
     useState<ExportOrientation>("p");
@@ -232,6 +238,28 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const dashboardId = getDashboardId(props);
+
+  useEffect(() => {
+    if (dashboard && favoriteGroups) {
+      const values = dashboard.parameters?.reduce((acc, parameter) => {
+        if (favoriteFilters.has(parameter.id)) {
+          const favoriteGroupId = favoriteFilters.get(parameter.id);
+          const values = JSON.parse(
+            favoriteGroups.find(group => group.id === Number(favoriteGroupId))
+              ?.group_values ?? "[]",
+          );
+
+          return { ...acc, [parameter.id]: values };
+        }
+        return {
+          ...acc,
+          [parameter.id]: parameterValues?.[parameter.id] ?? null,
+        };
+      }, {});
+      dispatch(setParameterValues(values));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dashboard, favoriteGroups]);
 
   const currentTabDashcards = useMemo(() => {
     if (!dashboard || !Array.isArray(dashboard.dashcards)) {

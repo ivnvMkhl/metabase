@@ -13,6 +13,7 @@ import PopoverWithTrigger from "metabase/components/PopoverWithTrigger";
 import { TextWidget } from "metabase/components/TextWidget";
 import { Sortable } from "metabase/core/components/Sortable";
 import CS from "metabase/css/core/index.css";
+import { favoriteFilters } from "metabase/dashboard/favoriteFIlters";
 import FormattedParameterValue from "metabase/parameters/components/FormattedParameterValue";
 import { WidgetStatusIcon } from "metabase/parameters/components/WidgetStatusIcon";
 import { NumberInputWidget } from "metabase/parameters/components/widgets/NumberInputWidget";
@@ -131,7 +132,10 @@ class ParameterValueWidget extends Component {
       return (
         <WidgetStatusIcon
           name="close"
-          onClick={() => this.props.setValue(null)}
+          onClick={() => {
+            favoriteFilters.delete(this.props.parameter.id);
+            this.props.setValue(null);
+          }}
         />
       );
     }
@@ -187,12 +191,17 @@ class ParameterValueWidget extends Component {
       placeholder,
       className,
       mimicMantine,
+      favoriteGroups,
     } = this.props;
     const { isFocused } = this.state;
     const hasValue = !parameterHasNoDisplayValue(value);
     const noPopover = hasNoPopover(parameter);
     const parameterTypeIcon = getParameterIconName(parameter);
     const showTypeIcon = !isEditing && !hasValue && !isFocused;
+    const activeFavoriteGroupId = favoriteFilters.get(parameter.id);
+    const activeFavGroup = favoriteGroups?.find(
+      favoriteGroup => favoriteGroup.id === activeFavoriteGroupId,
+    );
 
     if (noPopover) {
       return this.wrapSortable(
@@ -244,11 +253,23 @@ class ParameterValueWidget extends Component {
               />
             )}
             <div className={cx(CS.mr1, CS.textNoWrap)}>
-              <FormattedParameterValue
-                parameter={parameter}
-                value={value}
-                placeholder={placeholderText}
-              />
+              {activeFavGroup ? (
+                <span style={{ alignItems: "center", display: "flex" }}>
+                  <Icon
+                    name={"star_filled"}
+                    className={cx(CS.mr1, CS.flexNoShrink)}
+                    size={16}
+                    color={activeFavGroup.color}
+                  />
+                  {activeFavGroup.name}
+                </span>
+              ) : (
+                <FormattedParameterValue
+                  parameter={parameter}
+                  value={value}
+                  placeholder={placeholderText}
+                />
+              )}
             </div>
             {this.getActionIcon()}
           </ParameterValueWidgetTrigger>,

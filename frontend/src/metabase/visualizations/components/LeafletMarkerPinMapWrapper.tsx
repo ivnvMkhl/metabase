@@ -79,13 +79,29 @@ export const LeafletMarkerPinMap = forwardRef((props: any, ref) => {
       }, 10);
     };
 
+  const selector = `[data-card-key="${
+    props?.dashcard?.card_id || props?.card?.id
+  }"]`;
+  const chartNode = document.querySelector(selector);
+  const chartRect = chartNode?.getBoundingClientRect();
+
+  useEffect(() => {
+    const handleCloseDropdown = e => {
+      if (e?.srcElement?.id !== "update_favorite_button") {
+        setClickElement(null);
+      }
+    };
+    if (chartNode) {
+      chartNode.addEventListener("click", handleCloseDropdown);
+    }
+    return () => {
+      chartNode?.removeEventListener("click", handleCloseDropdown);
+    };
+  }, [chartNode]);
+
   if (isLoading) {
     return <SpinnerRoot />;
   }
-
-  const chartRect = document
-    .querySelector(`[data-testid="query-visualization-root"]`)
-    ?.getBoundingClientRect();
 
   const activeFavoriteGroups = favoriteList?.filter(
     ({ code }) => code === clickElement?.staticLabelFieldName,
@@ -97,7 +113,6 @@ export const LeafletMarkerPinMap = forwardRef((props: any, ref) => {
         ? undefined
         : clickElement && (
             <div
-              id="test-test"
               className={styles.favoriteMenu}
               style={{
                 top:
@@ -139,6 +154,7 @@ export const LeafletMarkerPinMap = forwardRef((props: any, ref) => {
                       style={{ background: favoriteGroup.color }}
                     />
                     <div
+                      id="update_favorite_button"
                       className={styles.favoriteMenuLabel}
                       onClick={handleAddFavorite(
                         targetValue,
@@ -157,7 +173,6 @@ export const LeafletMarkerPinMap = forwardRef((props: any, ref) => {
       <LeafletMarkerPinMapInternal
         {...props}
         onMarkerClick={onMarkerClick}
-        id="test-chart"
         ref={ref}
         favoriteList={favoriteList}
         clickElement={clickElement}

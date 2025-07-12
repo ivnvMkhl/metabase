@@ -155,7 +155,14 @@ function MainNavbarView({
           >
             {t`Home`}
           </PaddedSidebarLink>
-
+          <PaddedSidebarLink
+            isSelected={nonEntityItem?.url === "/browse/favorites"}
+            icon="star"
+            onClick={handleHomeClick}
+            url="/browse/favorites"
+          >
+            {`Избранное`}
+          </PaddedSidebarLink>
           {hasAttachedDWHFeature && uploadDbId && rootCollection && (
             <UploadCSV collection={rootCollection} />
           )}
@@ -168,14 +175,6 @@ function MainNavbarView({
           />
           {hasDataAccess && (
             <>
-              <PaddedSidebarLink
-                isSelected={nonEntityItem?.url === "/browse/favorites"}
-                icon="star"
-                onClick={handleHomeClick}
-                url="/browse/favorites"
-              >
-                {`Избранное`}
-              </PaddedSidebarLink>
               {!hasOwnDatabase && isAdmin && (
                 <AddYourOwnDataLink
                   icon="add"

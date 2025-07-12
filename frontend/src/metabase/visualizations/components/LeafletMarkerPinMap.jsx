@@ -174,9 +174,9 @@ export class LeafletMarkerPinMapInternal extends LeafletMap {
     }
 
     if (onMarkerClick) {
-      marker.on("click", () => {
+      marker.on("click", e => {
         const { clickElement } = this.props;
-
+        e?.originalEvent?.stopPropagation();
         if (!clickElement || clickElement.element !== marker._icon) {
           const {
             series: [

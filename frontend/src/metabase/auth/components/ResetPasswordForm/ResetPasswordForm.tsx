@@ -57,7 +57,9 @@ export const ResetPasswordForm = ({
     <div>
       <PasswordFormTitle>{t`New password`}</PasswordFormTitle>
       <PasswordFormMessage>
-        {t`To keep your data secure, passwords ${passwordDescription}`}
+        {
+          "Ради безопасности, пароль должен быть длиной не менее шести символов и включать одну цифру."
+        }
       </PasswordFormMessage>
       <FormProvider
         initialValues={initialValues}

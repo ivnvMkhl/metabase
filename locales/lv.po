@@ -11956,7 +11956,7 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} pieņēma viņu Metabāzes ielūgumu"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
+msgid "[SPN REPORT] Password Reset Request"
 msgstr "[Metabāze] Paroles atiestatīšanas pieprasījums"
 
 #: src/metabase/email/messages.clj
@@ -13845,7 +13845,7 @@ msgstr "Neizdevās ieplānot uzdevumus datu bāzei {0}"
 msgid "All elements must be distinct."
 msgstr "Visiem elementiem jābūt atšķirīgiem."
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "Izvēlieties kolonnas, kuras vēlaties iekļaut"
@@ -18321,12 +18321,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "Pākšaugi tiek pakāpeniski pārtraukti"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "Tā vietā tagad varat iestatīt {0}. Mēs noņemsim Pulses nākamajā laidienā un palīdzēsim migrēt visu, kas jums joprojām ir."
@@ -18335,7 +18335,7 @@ msgstr "Tā vietā tagad varat iestatīt {0}. Mēs noņemsim Pulses nākamajā l
 msgid "dashboard subscriptions"
 msgstr "informācijas paneļa abonementi"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} diagrammas jūsu abonementā neizskatīsies tāpat kā informācijas panelī. {1}"
 
@@ -18483,7 +18483,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "Iestatiet {0} avotu datu bāzi un veiciet migrāciju..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26505,12 +26505,12 @@ msgstr "Paraugu datubāzi nevarēja izvilkt spraudņu direktorijā, kā rezultā
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "Metabāzes konfigurācijas failiem ir nepieciešams Premium marķieris ar :advanced-config funkciju."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "Abonementu diagrammas var nedaudz atšķirties no diagrammām informācijas paneļos."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "Saņēmēji redzēs šos datus tāpat kā jūs, neatkarīgi no viņu atļaujām."
@@ -34749,4 +34749,3 @@ msgstr "Šis ir unikāls IDP identifikators. Bieži dēvē par entītijas ID vai
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "Dzēšot tabulu, radās kļūda"
-

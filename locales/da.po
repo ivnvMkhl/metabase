@@ -6575,7 +6575,7 @@ msgstr "Der er ingen revisioner for denne metric"
 msgid "Revision history for {0}"
 msgstr "Revisionshistorik for {0}"
 
-#. “X-Ray ••gennemlys•• denne metrik.” 
+#. “X-Ray ••gennemlys•• denne metrik.”
 #. Generally use BOTH of the words X-ray AND the common explanatory local language term for “shine light through” to highlight (no pun intended) meaning/intent of special Metabas-ey terms? Note to self; revise x-ray etc. translations with this thought in mind!
 #: frontend/src/metabase/reference/metrics/MetricSidebar.jsx:41
 msgid "X-ray this metric"
@@ -11956,7 +11956,7 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} accepterede deres Metabase-invitation"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
+msgid "[SPN REPORT] Password Reset Request"
 msgstr "[Metabase] Anmodning om nulstilling af adgangskode"
 
 #: src/metabase/email/messages.clj
@@ -13841,7 +13841,7 @@ msgstr "Kunne ikke planlægge opgaver for databasen {0}"
 msgid "All elements must be distinct."
 msgstr "Alle elementer skal være adskilte."
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "Vælg de kolonner, du vil inkludere"
@@ -18309,12 +18309,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "Pulser er ved at blive udfaset"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "Du kan nu konfigurere {0} i stedet for. Vi fjerner Pulses i en fremtidig udgivelse og hjælper dig med at migrere alle, du stadig har."
@@ -18323,7 +18323,7 @@ msgstr "Du kan nu konfigurere {0} i stedet for. Vi fjerner Pulses i en fremtidig
 msgid "dashboard subscriptions"
 msgstr "dashboard abonnementer"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} diagrammer i dit abonnement vil ikke se det samme ud som i dit betjeningspanel. {1}"
 
@@ -18471,7 +18471,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "Konfigurer {0} kildedatabase og kør migreringer..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26436,12 +26436,12 @@ msgstr "Eksempeldatabasen kunne ikke udpakkes til plugins-biblioteket, hvilket k
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "Metabase-konfigurationsfiler kræver et Premium-token med :advanced-config-funktionen."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "Diagrammer i abonnementer kan se lidt anderledes ud end diagrammer i dashboards."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "Modtagere vil se disse data, ligesom du ser dem, uanset deres tilladelser."
@@ -34652,4 +34652,3 @@ msgstr "Dette er en unik identifikator for IdP'en. Omtales ofte som Entity ID el
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "Der opstod en fejl ved sletning af tabellen"
-

@@ -12018,7 +12018,7 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} قبلت دعوة عملية التمثيل"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
+msgid "[SPN REPORT] Password Reset Request"
 msgstr "[Metabase] طلب إعادة تعيين كلمة المرور"
 
 #: src/metabase/email/messages.clj
@@ -13923,7 +13923,7 @@ msgstr "فشل في جدولة المهام لقاعدة البيانات {0}"
 msgid "All elements must be distinct."
 msgstr "يجب أن تكون جميع العناصر متميزة."
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "اختر الأعمدة التي تريد تضمينها"
@@ -18424,12 +18424,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "يتم التخلص التدريجي من النبضات"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "يمكنك الآن إعداد {0} بدلاً من ذلك. سنقوم بإزالة النبضات في إصدار مستقبلي ، ونساعدك على ترحيل أي لا يزال لديك."
@@ -18438,7 +18438,7 @@ msgstr "يمكنك الآن إعداد {0} بدلاً من ذلك. سنقوم ب
 msgid "dashboard subscriptions"
 msgstr "اشتراكات لوحة القيادة"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} المخططات في اشتراكك لن تبدو كما هي في لوحة القيادة. {1}"
 
@@ -18586,7 +18586,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "إعداد قاعدة بيانات المصدر {0} وتشغيل الترحيل ..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26715,12 +26715,12 @@ msgstr "تعذر استخراج نموذج قاعدة البيانات إلى د
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "تتطلب ملفات تكوين قاعدة التعريف رمزًا مميزًا مع ميزة التكوين المتقدم."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "قد تبدو الرسوم البيانية في الاشتراكات مختلفة قليلاً عن الرسوم البيانية في لوحات المعلومات."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "سيرى المستلمون هذه البيانات تمامًا كما تراها ، بغض النظر عن أذوناتهم."
@@ -35018,4 +35018,3 @@ msgstr "وهذا هو المعرف الفريد لموفر الهوية (IdP). �
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "حدث خطأ أثناء حذف الجدول"
-

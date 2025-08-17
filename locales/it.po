@@ -11955,7 +11955,7 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} ha accettato l'invito a Metabase."
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
+msgid "[SPN REPORT] Password Reset Request"
 msgstr "[Metabase] Richiesta di recupero Password"
 
 #: src/metabase/email/messages.clj
@@ -13839,7 +13839,7 @@ msgstr "Scheduling dei task per il Database {0} non riuscita"
 msgid "All elements must be distinct."
 msgstr "Tutti gli elementi devono essere distinti"
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "Scegli le colonne che desideri includere"
@@ -18310,12 +18310,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "Gli impulsi vengono eliminati gradualmente"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "Ora è possibile impostare {0} invece. Rimuoveremo gli Impulsi in un futuro rilascio e ti aiuteremo a migrare quelli che hai ancora."
@@ -18324,7 +18324,7 @@ msgstr "Ora è possibile impostare {0} invece. Rimuoveremo gli Impulsi in un fut
 msgid "dashboard subscriptions"
 msgstr "abbonamenti cruscotto"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "I grafici nel tuo abbonamento non avranno lo stesso aspetto del tuo cruscotto. {1}"
 
@@ -18472,7 +18472,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "Impostare il database sorgente {0} ed eseguire le migrazioni..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26445,12 +26445,12 @@ msgstr "Non è stato possibile estrarre il database di esempio nella directory d
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "I file di configurazione di Metabase richiedono un token Premium con la funzione :advanced-config."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "I grafici nelle sottoscrizioni possono avere un aspetto leggermente diverso da quello dei grafici nei dashboard."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "I destinatari vedranno questi dati proprio come li vedete voi, indipendentemente dalle loro autorizzazioni."
@@ -34666,4 +34666,3 @@ msgstr "Si tratta di un identificativo unico per l'IdP. Spesso viene indicato co
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "Si è verificato un errore nell'eliminazione della tabella"
-

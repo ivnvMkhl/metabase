@@ -420,8 +420,8 @@ msgstr "Сохранённые запросы и другие составляю
 msgid "If you're sure you want to retire this {0}, please write a quick explanation of why it's being retired:"
 msgstr "Если вы уверены, что хотите убрать {0}, пожалуйста, напишите краткое обьяснение к вашим действиям:"
 
-#. Звучит немного неуклюже, поменял на 
-#. 
+#. Звучит немного неуклюже, поменял на
+#.
 #. "Это будет отображаться в ленте активности и в электронном письме, которое будет отправлено всем участникам вашей команды, кто создал что-то используя это {0}"
 #: frontend/src/metabase/admin/datamodel/components/ObjectRetireModal.jsx:49
 msgid "This will show up in the activity feed and in an email that will be sent to anyone on your team who created something that uses this {0}."
@@ -12007,20 +12007,20 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} принял приглашение в Metabase"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
-msgstr "[Metabase] Запрос на сброс пароля"
+msgid "[SPN REPORT] Password Reset Request"
+msgstr "[SPN REPORT] Запрос на сброс пароля"
 
 #: src/metabase/email/messages.clj
 msgid "[Metabase] Notification"
-msgstr "[Metabase] Уведомление"
+msgstr "[SPN REPORT] Уведомление"
 
 #: src/metabase/email/messages.clj
 msgid "[Metabase] Help make Metabase better."
-msgstr "[Metabase] Помогите сделать Metabase лучше"
+msgstr "[SPN REPORT] Помогите сделать Metabase лучше"
 
 #: src/metabase/email/messages.clj
 msgid "[Metabase] Tell us how things are going."
-msgstr "[Metabase] Расскажите, как идут дела?"
+msgstr "[SPN REPORT] Расскажите, как идут дела?"
 
 #: metabase/legacy_mbql/util.cljc:517
 msgid "Error: query''s source query has not been resolved. You probably need to `preprocess` the query first."
@@ -13901,7 +13901,7 @@ msgstr "Ошибка планирования задач для Базы дан�
 msgid "All elements must be distinct."
 msgstr "Все элементы должны быть уникальны"
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "Выберите столбцы которые хотите включить"
@@ -18378,12 +18378,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "Импульсы постепенно прекращаются"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "Теперь ты можешь настроить {0} вместо этого. Мы удалим Pulses в будущем релизе и поможем вам перенести все, что у вас еще осталось."
@@ -18392,7 +18392,7 @@ msgstr "Теперь ты можешь настроить {0} вместо эт�
 msgid "dashboard subscriptions"
 msgstr "Подписки на дашборд"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} диаграммы в вашей подписке не будут выглядеть так же, как на дашборде. {1}"
 
@@ -18540,7 +18540,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "Настройте исходную базу данных и запустите миграцию..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26939,12 +26939,12 @@ msgstr "База данных образца не может быть извле
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "Для файлов конфигурации Metabase требуется токен Premium с функцией :advanced-config."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "Диаграммы в подписках могут выглядеть несколько иначе, чем диаграммы на дашбордах."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "Получатели будут видеть эти данные так же, как и вы, независимо от их привилегий."
@@ -35201,4 +35201,3 @@ msgstr "Это уникальный идентификатор для IdP. Ча�
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "Произошла ошибка при удалении таблицы"
-

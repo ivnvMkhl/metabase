@@ -142,7 +142,7 @@
             [admin-email])
           (t2/select-fn-set :email 'User, :is_superuser true, :is_active true, {:order-by [[:id :asc]]})))
 
-(defn send-user-joined-admin-notification-email! "disabled" [] )
+(defn send-user-joined-admin-notification-email! "disabled" [& _args] nil )
 ;; (defn send-user-joined-admin-notification-email!
 ;;   "Send an email to the `invitor` (the Admin who invited `new-user`) letting them know `new-user` has joined."
 ;;   [new-user & {:keys [google-auth?]}]
@@ -242,7 +242,7 @@
                                                  [:= :is_active true]
                                                  [:in :id user-ids]]}))))))
 
-(defn send-persistent-model-error-email! "disabled" [])
+(defn send-persistent-model-error-email! "disabled" [& _args] nil)
 ;; (defn send-persistent-model-error-email!
 ;;   "Format and send an email informing the user about errors in the persistent model refresh task."
 ;;   [database-id persisted-infos trigger]
@@ -276,7 +276,7 @@
 ;;          :message-type :html
 ;;          :message      message-body}))))
 
-(defn send-follow-up-email! "disabled" [] )
+(defn send-follow-up-email! "disabled" [& _args] nil )
 ;; (defn send-follow-up-email!
 ;;   "Format and send an email to the system admin following up on the installation."
 ;;   [email]
@@ -293,7 +293,7 @@
 ;;                :message      (stencil/render-file "metabase/email/follow_up_email" context)}]
 ;;     (email/send-message! email)))
 
-(defn send-creator-sentiment-email! "disabled" [])
+(defn send-creator-sentiment-email! "disabled" [& _args] nil)
 ;; (defn send-creator-sentiment-email!
 ;;   "Format and send an email to a creator with a link to a survey. If a [[blob]] is included, it will be turned into json
 ;;   and then base64 encoded."
@@ -662,21 +662,21 @@
 (def ^:private stopped-template            (template-path "alert_stopped_working"))
 (def ^:private archived-template           (template-path "alert_archived"))
 
-(defn send-new-alert-email! "disabled" [])
+(defn send-new-alert-email! "disabled" [& _args] nil)
 ;; (defn send-new-alert-email!
 ;;   "Send out the initial 'new alert' email to the `creator` of the alert"
 ;;   [{:keys [creator] :as alert}]
 ;;   (send-email! creator "You set up an alert" new-alert-template
 ;;                (common-alert-context alert alert-condition-text)))
 
-(defn send-you-unsubscribed-alert-email! "disabled" [])
+(defn send-you-unsubscribed-alert-email! "disabled" [& _args] nil)
 ;; (defn send-you-unsubscribed-alert-email!
 ;;   "Send an email to `who-unsubscribed` letting them know they've unsubscribed themselves from `alert`"
 ;;   [alert who-unsubscribed]
 ;;   (send-email! who-unsubscribed "You unsubscribed from an alert" you-unsubscribed-template
 ;;                (common-alert-context alert)))
 
-(defn send-admin-unsubscribed-alert-email! "disabled" [])
+(defn send-admin-unsubscribed-alert-email! "disabled" [& _args] nil)
 ;; (defn send-admin-unsubscribed-alert-email!
 ;;   "Send an email to `user-added` letting them know `admin` has unsubscribed them from `alert`"
 ;;   [alert user-added {:keys [first_name last_name] :as _admin}]
@@ -684,7 +684,7 @@
 ;;     (send-email! user-added "You’ve been unsubscribed from an alert" admin-unsubscribed-template
 ;;                  (assoc (common-alert-context alert) :adminName admin-name))))
 
-(defn send-you-were-added-alert-email! "disabled" [])
+(defn send-you-were-added-alert-email! "disabled" [& _args] nil)
 ;; (defn send-you-were-added-alert-email!
 ;;   "Send an email to `user-added` letting them know `admin-adder` has added them to `alert`"
 ;;   [alert user-added {:keys [first_name last_name] :as _admin-adder}]
@@ -693,7 +693,7 @@
 
 (def ^:private not-working-subject "One of your alerts has stopped working")
 
-(defn send-alert-stopped-because-archived-email! "disabled" [])
+(defn send-alert-stopped-because-archived-email! "disabled" [& _args] nil)
 ;; (defn send-alert-stopped-because-archived-email!
 ;;   "Email to notify users when a card associated to their alert has been archived"
 ;;   [alert user {:keys [first_name last_name] :as _archiver}]
@@ -702,14 +702,14 @@
 ;;                                                              :questionName (format "%s (#%d)" card-name card-id)
 ;;                                                              :archiverName (format "%s %s" first_name last_name)})))
 
-(defn send-alert-stopped-because-changed-email! "disabled" [])
+(defn send-alert-stopped-because-changed-email! "disabled" [& _args] nil)
 ;; (defn send-alert-stopped-because-changed-email!
 ;;   "Email to notify users when a card associated to their alert changed in a way that invalidates their alert"
 ;;   [alert user {:keys [first_name last_name] :as _archiver}]
 ;;   (let [edited-text (format "the question was edited by %s %s" first_name last_name)]
 ;;     (send-email! user not-working-subject stopped-template (assoc (common-alert-context alert) :deletionCause edited-text))))
 
-(defn send-slack-token-error-emails! "disabled" [])
+(defn send-slack-token-error-emails! "disabled" [& _args] nil)
 ;; (defn send-slack-token-error-emails!
 ;;   "Email all admins when a Slack API call fails due to a revoked token or other auth error"
 ;;   []
@@ -722,7 +722,7 @@
 ;;                                         {:logoHeader  true
 ;;                                          :settingsUrl (str (public-settings/site-url) "/admin/settings/slack")}))))
 
-(defn send-broken-subscription-notification! "disabled" [])
+(defn send-broken-subscription-notification! "disabled" [& _args] nil)
 ;; (defn send-broken-subscription-notification!
 ;;   "Email dashboard and subscription creators information about a broken subscription due to bad parameters"
 ;;   [{:keys [dashboard-id dashboard-name pulse-creator dashboard-creator affected-users bad-parameters]}]

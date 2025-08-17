@@ -191,7 +191,7 @@
   either `:text` or `:html` or `:attachments`.
 
     (email/send-message!
-     {:subject      \"[Metabase] Password Reset Request\"
+     {:subject      \"[SPN REPORT] Password Reset Request\"
       :recipients   [\"cam@metabase.com\"]
       :message-type :text
       :message      \"How are you today?\")}

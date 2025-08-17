@@ -18,7 +18,7 @@
 (deftest new-user-email
   (is (= [{:from    "notifications@metabase.com",
            :to      ["test@test.com"],
-           :subject "You're invited to join Metabase Test's Metabase",
+           :subject "You're invited to join SPN Report Test's SPN Report",
            :body    [{:type "text/html; charset=utf-8"}]}]
          (tu/with-temporary-setting-values [site-name "Metabase Test"]
            (et/with-fake-inbox
@@ -35,7 +35,7 @@
       (messages/send-password-reset-email! "test@test.com" nil "http://localhost/some/url" true)
       (is (= [{:from    "notifications@metabase.com",
                :to      ["test@test.com"],
-               :subject "[Metabase] Password Reset Request",
+               :subject "[SPN REPORT] Password Reset Request",
                :body    [{:type "text/html; charset=utf-8"}]}]
              (-> (@et/inbox "test@test.com")
                  (update-in [0 :body 0] dissoc :content))))))

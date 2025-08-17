@@ -11986,7 +11986,7 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0} zaakceptował zaproszenie do Metabase"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
+msgid "[SPN REPORT] Password Reset Request"
 msgstr "[Metabase] Żądanie Resetu Hasła"
 
 #: src/metabase/email/messages.clj
@@ -13881,7 +13881,7 @@ msgstr "Nie udało się zaplanować zadań dla bazy danych {0}"
 msgid "All elements must be distinct."
 msgstr "Wszystkie elementy muszą być unikalne."
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "Wybierz kolumny, które chcesz uwzględnić"
@@ -18368,12 +18368,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "Pulsy są stopniowo wycofywane"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "Możesz teraz ustawić {0} zamiast tego. W przyszłym wydaniu usuniemy pulsy i pomożemy ci migrować te, które jeszcze masz."
@@ -18382,7 +18382,7 @@ msgstr "Możesz teraz ustawić {0} zamiast tego. W przyszłym wydaniu usuniemy p
 msgid "dashboard subscriptions"
 msgstr "subskrypcje pulpitów"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} wykresy w subskrypcji nie będą wyglądać tak samo jak w Twoim pulpicie. {1}"
 
@@ -18530,7 +18530,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "Ustaw źródłową bazę danych {0} i uruchom migrację..."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26576,12 +26576,12 @@ msgstr "Nie udało się wyodrębnić przykładowej bazy danych do katalogu plugi
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "Pliki konfiguracyjne metabaz wymagają tokena Premium z funkcją :advanced-config."
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "Wykresy w subskrypcjach mogą wyglądać nieco inaczej niż wykresy w dashboardach."
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "Odbiorcy zobaczą te dane tak samo jak Ty, niezależnie od ich uprawnień."
@@ -34840,4 +34840,3 @@ msgstr "Jest to unikalny identyfikator IdP. Często określany jako Entity ID lu
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "Wystąpił błąd podczas usuwania tabeli"
-

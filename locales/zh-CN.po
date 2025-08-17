@@ -11981,8 +11981,8 @@ msgid "{0} accepted their Metabase invite"
 msgstr "{0}已接受其元数据库邀请"
 
 #: src/metabase/email/messages.clj
-msgid "[Metabase] Password Reset Request"
-msgstr "[Metabase]密码重置请求"
+msgid "[SPN REPORT] Password Reset Request"
+msgstr "[SPN REPORT]密码重置请求"
 
 #: src/metabase/email/messages.clj
 msgid "[Metabase] Notification"
@@ -13862,7 +13862,7 @@ msgstr "无法为数据库{0}计划任务"
 msgid "All elements must be distinct."
 msgstr "所有元素都必须是不同的。"
 
-#: 
+#:
 msgctxt "Modal for selecting columns in source data or when doing a join."
 msgid "Pick the columns you want to include"
 msgstr "选择要包含的列"
@@ -18316,12 +18316,12 @@ msgstr "{0} {1}"
 msgid "{1}"
 msgstr "{1}"
 
-#: 
+#:
 msgctxt "This is a new information message on the new pulse creation page."
 msgid "Pulses are being phased out"
 msgstr "定时任务正在逐步淘汰"
 
-#: 
+#:
 msgctxt "An info message letting you know you can create dashboard subscriptions instead of pulses."
 msgid "You can now set up {0} instead. We'll remove Pulses in a future release, and help you migrate any that you still have."
 msgstr "您现在可以改为设置 {0}。 我们将在未来的版本中删除定时任务，并帮助您迁移您仍然拥有的任何内容。"
@@ -18330,7 +18330,7 @@ msgstr "您现在可以改为设置 {0}。 我们将在未来的版本中删除�
 msgid "dashboard subscriptions"
 msgstr "仪表板订阅"
 
-#: 
+#:
 msgid "{0} charts in your subscription won't look the same as in your dashboard. {1}"
 msgstr "{0} 订阅中的图表与仪表盘中的图表看起来不一样。{1}"
 
@@ -18478,7 +18478,7 @@ msgid "Set up {0} source database and run migrations..."
 msgstr "设置{0}源数据库并运行迁移.."
 
 #. make sure the dest DB is up-to-date
-#. 
+#.
 #. don't need or want to run data migrations in the target DB, since the data is already migrated appropriately
 #: metabase/cmd/copy.clj:391
 msgid "Set up {0} target database and run migrations..."
@@ -26407,12 +26407,12 @@ msgstr "样本数据库不能被提取到插件目录中，这可能导致启动
 msgid "Metabase config files require a Premium token with the :advanced-config feature."
 msgstr "Metabase配置文件需要一个具有:高级配置功能的高级令牌。"
 
-#: 
+#:
 msgctxt "This is in the sidebar when creating or editing a dashboard subscription."
 msgid "Charts in subscriptions may look slightly different from charts in dashboards."
 msgstr "订阅中的图表可能看起来与仪表盘中的图表略有不同。"
 
-#: 
+#:
 msgctxt "Seen when creating a new dashboard subscription."
 msgid "Recipients will see this data just as you see it, regardless of their permissions."
 msgstr "收件人将看到这些数据，就像你看到的一样，不管他们的权限如何。"
@@ -34605,4 +34605,3 @@ msgstr "这是 IDP 的唯一标识符。通常称为实体 ID 或简称 \"发行
 #: metabase_enterprise/upload_management/api.clj:35
 msgid "There was an error deleting the table"
 msgstr "删除表时出现错误"
-

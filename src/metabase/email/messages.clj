@@ -53,7 +53,7 @@
   via tru if a name isn't configured."
   []
   (or (public-settings/application-name)
-      (trs "Metabase")))
+      (trs "SPN Report")))
 
 ;; Dev only -- disable template caching
 (when config/is-dev?

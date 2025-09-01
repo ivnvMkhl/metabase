@@ -5,6 +5,8 @@ import { ExportPageOverlay } from "../ExportPageOverlay/ExportPageOverlay";
 import {
   ContainerPadding,
   DashboardHeader,
+  DashboardSubtitle,
+  DashbordTitle,
   Divider,
   ExportContainerWrapper,
 } from "./ExportContainer.styled";
@@ -14,6 +16,7 @@ type ExportContainerProps = {
   format?: "a4" | "a3";
   orientation?: "p" | "l";
   title: string;
+  subtitle?: string;
 };
 
 export const EXPORT_NODE_ID = "customExportNode";
@@ -23,6 +26,7 @@ const ExportContainer: FC<ExportContainerProps> = ({
   format = "a3",
   orientation = "l",
   title,
+  subtitle,
 }) => {
   return (
     <>
@@ -33,7 +37,10 @@ const ExportContainer: FC<ExportContainerProps> = ({
       >
         <ExportPageOverlay />
         <ExportContainerWrapper>
-          <DashboardHeader>{title}</DashboardHeader>
+          <DashbordTitle>
+            <DashboardHeader>{title}</DashboardHeader>
+            <DashboardSubtitle>{subtitle}</DashboardSubtitle>
+          </DashbordTitle>
           {children}
         </ExportContainerWrapper>
       </ContainerPadding>

@@ -56,6 +56,7 @@ import { BrowseModels } from "./browse/components/BrowseModels";
 import BrowseSchemas from "./browse/components/BrowseSchemas";
 import { BrowseTables } from "./browse/components/BrowseTables";
 import { FavoriteList } from "./browse/components/FavoriteList/FavoriteList";
+import { ExportEntryPDF } from "./dashboard/components/ExportEntryPDF/ExportEntryPDF";
 import { ExportPDF } from "./dashboard/components/ExportPDF/ExportPDF";
 import {
   CanAccessMetabot,
@@ -166,7 +167,11 @@ export const getRoutes = store => {
             title="ExportPDF"
             component={ExportPDF}
           />
-
+          <Route
+            path="dashboard/:slug/export-entry-pdf"
+            title="ExportEntryPDF"
+            component={ExportEntryPDF}
+          />
           <Route path="/question">
             <IndexRoute component={QueryBuilder} />
             <Route path="notebook" component={QueryBuilder} />

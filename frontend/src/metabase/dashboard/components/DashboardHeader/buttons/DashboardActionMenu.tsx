@@ -57,10 +57,17 @@ export const getExtraButtons = ({
   // });
 
   extraButtons.push({
-    title: "Экспортировать для печати",
-    icon: "folder",
+    title: "Экспортировать текущий лист",
+    icon: "document",
     link: `${pathname}/export-pdf`,
     event: "Dashboard;ExportPDF",
+  });
+
+  extraButtons.push({
+    title: "Экспортировать весь дашборд",
+    icon: "folder",
+    link: `${pathname}/export-entry-pdf`,
+    event: "Dashboard;ExportEntryPDF",
   });
 
   if (canEdit) {

@@ -43,6 +43,16 @@ export const DashboardHeader = styled.h2`
   padding-bottom: 10px;
 `;
 
+export const DashboardSubtitle = styled.h3`
+  padding-bottom: 10px;
+`;
+
+export const DashbordTitle = styled.div`
+  display: flex;
+  align-items: end;
+  gap: 12px;
+`;
+
 export const Divider = styled.div`
   border-bottom: 1px dashed gray;
 `;

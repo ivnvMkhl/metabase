@@ -218,7 +218,7 @@ export function getDashboardId({ dashboardId, params }: DashboardAppProps) {
   return Urls.extractEntityId(params.slug) as DashboardId;
 }
 
-const ExportPDFComponent: FC<DashboardAppProps> = props => {
+const ExportEntryPDFComponent: FC<DashboardAppProps> = props => {
   const {
     fetchDashboard,
     setErrorPage,
@@ -442,48 +442,47 @@ const ExportPDFComponent: FC<DashboardAppProps> = props => {
       orientation={exportOrientation}
       dashboardName={dashboard.name}
     >
-      {dashboard.tabs
-        .filter(tab => tab.id === selectedTabId)
-        .map(tab => {
-          const exportDashcardGroups = getDashcardGroups(
-            dashboard.dashcards.filter(
-              dashcard => dashcard.dashboard_tab_id === tab.id,
-            ),
-            pageMaxRows,
-            appendCardsHeight,
+      {dashboard.tabs.map(tab => {
+        const exportDashcardGroups = getDashcardGroups(
+          dashboard.dashcards.filter(
+            dashcard => dashcard.dashboard_tab_id === tab.id,
+          ),
+          pageMaxRows,
+          appendCardsHeight,
+        );
+        return exportDashcardGroups.map((dashcards, index) => {
+          return (
+            <ExportContainer
+              key={`${tab.id}${index}`}
+              title={dashboard.name}
+              subtitle={tab.name}
+              format={exportFormat}
+              orientation={exportOrientation}
+            >
+              <DashboardExportGridConnected
+                clickBehaviorSidebarDashcard={
+                  props.clickBehaviorSidebarDashcard
+                }
+                isNightMode={isNightMode}
+                isFullscreen={false}
+                isEditingParameter={props.isEditingParameter}
+                isEditing={props.isEditing}
+                dashboard={{ ...dashboard, dashcards }}
+                slowCards={props.slowCards}
+                navigateToNewCardFromDashboard={
+                  props.navigateToNewCardFromDashboard
+                }
+                selectedTabId={tab.id}
+              />
+            </ExportContainer>
           );
-          return exportDashcardGroups.map((dashcards, index) => {
-            return (
-              <ExportContainer
-                key={`${tab.id}${index}`}
-                title={dashboard.name}
-                format={exportFormat}
-                orientation={exportOrientation}
-              >
-                <DashboardExportGridConnected
-                  clickBehaviorSidebarDashcard={
-                    props.clickBehaviorSidebarDashcard
-                  }
-                  isNightMode={isNightMode}
-                  isFullscreen={false}
-                  isEditingParameter={props.isEditingParameter}
-                  isEditing={props.isEditing}
-                  dashboard={{ ...dashboard, dashcards }}
-                  slowCards={props.slowCards}
-                  navigateToNewCardFromDashboard={
-                    props.navigateToNewCardFromDashboard
-                  }
-                  selectedTabId={tab.id}
-                />
-              </ExportContainer>
-            );
-          });
-        })}
+        });
+      })}
     </ExportMenu>
   );
 };
 
-export const ExportPDF = _.compose(
+export const ExportEntryPDF = _.compose(
   connector,
   title(
     ({
@@ -495,7 +494,7 @@ export const ExportPDF = _.compose(
     }),
   ),
   titleWithLoadingTime("loadingStartTime"),
-)(ExportPDFComponent);
+)(ExportEntryPDFComponent);
 
 function isSuccessfulFetchDashboardResult(
   result: FetchDashboardResult,

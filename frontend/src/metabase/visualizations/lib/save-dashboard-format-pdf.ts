@@ -3,6 +3,7 @@ export const saveFormatPdf = async (
   fileName: string,
   format: "a3" | "a4",
   orientation: "l" | "p",
+  onEnd: () => void,
 ) => {
   const exportFileName = `${fileName}.pdf`;
   const imageSize = {
@@ -37,30 +38,43 @@ export const saveFormatPdf = async (
   const { default: html2canvas } = await import("html2canvas-pro");
   const pdf = new jspdf({ unit: "mm", format, orientation });
 
-  const images = [...nodes].map(async node => {
+  // Обрабатываем элементы последовательно, а не параллельно
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
     if (node && node instanceof HTMLElement) {
-      return await html2canvas(node, {
-        useCORS: true,
-      });
-    }
-  });
+      // Добавляем небольшую задержку между обработкой элементов
+      if (i > 0) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
 
-  images
-    .reduce(async (acc, imagePromise, index) => {
-      const image = await imagePromise;
+      const image = await html2canvas(node, {
+        useCORS: true,
+        // Ограничиваем качество для снижения нагрузки
+        scale: 1,
+        // Отключаем ненужные опции
+        logging: false,
+        allowTaint: false,
+        // Ограничиваем размер
+        width: Math.min(node.offsetWidth, 1920),
+        height: Math.min(node.offsetHeight, 1080),
+      });
+
       const { w, h } = imageSize[format][orientation];
       if (image) {
-        if (index === 0) {
-          pdf.addImage(image, "PNG", 0, 0, w, h, "", "FAST", 0);
+        if (i === 0) {
+          pdf.addImage(image, "JPEG", 0, 0, w, h, "", "FAST", 0);
         } else {
           pdf
             .addPage(format, orientation)
             .addImage(image, "JPEG", 0, 0, w, h, "", "FAST", 0);
         }
+
+        // Освобождаем память от обработанного изображения
+        image.remove();
       }
-      return acc;
-    }, Promise.resolve())
-    .then(() => {
-      pdf.save(exportFileName);
-    });
+    }
+  }
+
+  pdf.save(exportFileName);
+  onEnd();
 };

@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import { useState, type FC, type ReactNode } from "react";
 
 import { Button, Select, Switch } from "metabase/ui";
 import { saveFormatPdf } from "metabase/visualizations/lib/save-dashboard-format-pdf";
@@ -29,9 +29,13 @@ const ExportMenu: FC<ExportMenuProps> = ({
   orientation,
   dashboardName,
 }) => {
+  const [isExporting, setIsExporting] = useState(false);
   const handleExport = async () => {
+    setIsExporting(true);
     const exportNodes = document.querySelectorAll(`#${EXPORT_NODE_ID}`);
-    await saveFormatPdf(exportNodes, dashboardName, format, orientation);
+    await saveFormatPdf(exportNodes, dashboardName, format, orientation, () =>
+      setIsExporting(false),
+    );
   };
 
   return (
@@ -60,7 +64,13 @@ const ExportMenu: FC<ExportMenuProps> = ({
           />
           <span>Растягивать карточки до конца страницы</span>
         </SwitchWidthLabel>
-        <Button onClick={handleExport}>Экспортировать</Button>
+        <Button
+          disabled={isExporting}
+          loading={isExporting}
+          onClick={handleExport}
+        >
+          {isExporting ? "Экспортируем..." : "Экспортировать"}
+        </Button>
       </Menu>
       {children}
     </Wrapper>
